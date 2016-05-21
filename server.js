@@ -1,1 +1,2 @@
-app = require(server/app.js)
+var app = require(server/app.js)
+
