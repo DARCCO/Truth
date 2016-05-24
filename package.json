@@ -30,7 +30,7 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "lodash": "^3.10.1",
-    "mongoose": "^4.4.17",
+    "mongoose": "^4.4.19",
     "morgan": "^1.7.0",
     "nodemon": "^1.9.2",
     "react": "^0.14.3",
