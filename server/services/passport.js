@@ -21,7 +21,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
   	} else {
   	  done(null, false);
   	}
-  })
-})
+  });
+});
 
 // Tell passport to use this strategy
