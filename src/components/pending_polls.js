@@ -1,44 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deletePoll } from '../actions/index';
+import { deletePendingPoll } from '../actions/index';
+import { fetchPolls } from '../actions/index';
 import _ from 'lodash';
+import Header from './header.js';
 
 class PendingPolls extends Component {
   constructor(props) {
     super(props);
-    this.renderAnswers = this.renderAnswers.bind(this);
+
+    this.renderPendingPolls = this.renderPendingPolls.bind(this);
   }
   //need to limit polls to like 20
-  renderAnswers(answer, key) {
-    return (
-      <div className="col-md-5">
-        <button className="btn btn-primary">{key}</button>
-      </div>
-    );
+  componentWillMount(){
+    this.props.fetchPolls();
   }
 
   renderPendingPolls(pollsData, key) {
     var photo = pollsData.photo;
     var question = pollsData.question;
     var answers = pollsData.answers;
-    console.log('photo', photo);
-    console.log('question:', question);
-    console.log('answers:', answers);
-    console.log('key', key);
+    var pollId= key;
+
     return (
-        <div key={key}>
+        <div key={pollId}>
           <div className="col-md-12">
             <h3 className="text-center">{question}</h3>
           </div>
           <div className="col-md-2">
-            <img src='https://developer.bluetooth.org/community/lists/community%20discussion/%22/_layouts/15/images/person.gif?rev=23%22'/>
+            <img src= {photo}/>
           </div>
           <div className="col-md-10 center">
             { _.map(answers, (answer, key) => {
               return (
-                <div className="col-md-5">
-                  <button className="btn btn-primary">{key}</button>
+                <div className="col-md-5" >
+                  <button className="btn btn-primary" onClick={ ()=> this.props.deletePendingPoll(pollId) }>{key}</button>
                 </div>
               );
             })}
@@ -47,11 +44,10 @@ class PendingPolls extends Component {
     );
   }
 
-  //{this.props.pendingPolls.map(this.renderPendingPolls)}
   render() {
-    console.log('inside render:', this.props.pendingPolls);
     return (
       <div>
+      <Header />
       {_.map(this.props.pendingPolls, this.renderPendingPolls)}
       </div>
     );
@@ -60,13 +56,13 @@ class PendingPolls extends Component {
 
 
 
-function mapStateToProps({ pendingPolls }) {
-  return { pendingPolls };
+function mapStateToProps(state) {
+  return { pendingPolls: state.user.pending };
 }
 
 //
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ deletePoll }, dispatch);
+  return bindActionCreators({ deletePendingPoll, fetchPolls }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PendingPolls);

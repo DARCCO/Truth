@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import PendingReducer from './reducer_pending';
-import ResultsReducer from './reducer_results';
+import UserReducer from './reducer_user';
 import { reducer as formReducer } from 'redux-form';
+import AuthReducer from './auth_reducer';
 
 const rootReducer = combineReducers({
-  pendingPolls: PendingReducer,
-  resultsPolls: ResultsReducer,
-  form: formReducer
+  form: formReducer,
+  user: UserReducer,
+  auth: AuthReducer
 });
 
 export default rootReducer;
