@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import AppBar from 'material-ui/AppBar';
 
 
 export default class App extends Component {
@@ -7,7 +8,7 @@ export default class App extends Component {
     return (
       <div>
         <Link to="/" className="text-center">
-          <h1>Truth</h1>
+          <AppBar title='Truth'/>
         </Link>
         {this.props.children}
       </div>
