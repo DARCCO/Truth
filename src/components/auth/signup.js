@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import { Link } from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import LoginHeader from './login_header';
+import Paper from 'material-ui/Paper';
 
 class Signup extends Component {
   handleFormSubmit(formProps){
@@ -17,30 +22,35 @@ class Signup extends Component {
     }
   }
   render() {
+    const style = {
+      height: 700
+    };
       const { handleSubmit, fields: { username, password, passwordConfirm }} = this.props;
     return (
-      <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset className= 'form-group'>
-          <label>Username:</label>
-          <input className= 'form-control' {...username}/>
-          {username.touched && username.error && <div className= 'error'>{username.error}</div>}
-        </fieldset>
-        <fieldset className= 'form-group'>
-          <label>Password:</label>
-          <input className= 'form-control' {...password} type= 'password'/>
-          {password.touched && password.error && <div className= 'error'>{password.error}</div>}
-        </fieldset>
-        <fieldset className= 'form-group'>
-          <label>Confirm Password:</label>
-          <input className= 'form-control' {...passwordConfirm} type= 'password'/>
-          {passwordConfirm.touched && passwordConfirm.error && <div className= 'error'>{passwordConfirm.error}</div>}
-        </fieldset>
-        {this.renderAlert()}
-        <button action= 'submit' className= 'btn btn-primary'>Sign Up</button>
-        <Link to= '/login'>
-          Login
-        </Link>
-      </form>
+      <div>
+        <LoginHeader value={1} />
+        <Paper style= {style} zDepth= {4}>
+        <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
+          <fieldset className= 'form-group'>
+            <TextField halfWidth hintText= 'Username' { ...username }/>
+            {username.touched && username.error && <div className= 'error'>{username.error}</div>}
+          </fieldset>
+          <fieldset className= 'form-group'>
+            <TextField halfWidth hintText= 'Password' { ...password }/>
+            {password.touched && password.error && <div className= 'error'>{password.error}</div>}
+          </fieldset>
+          <fieldset className= 'form-group'>
+            <TextField halfWidth hintText= 'Confirm Password' { ...passwordConfirm }/>
+            {passwordConfirm.touched && passwordConfirm.error && <div className= 'error'>{passwordConfirm.error}</div>}
+          </fieldset>
+          {this.renderAlert()}
+          <RaisedButton type='submit' label= 'Sign Up' primary= {true}/>      
+          <Link to= '/login'>
+           <FlatButton label='Login' secondary= {true} />
+          </Link>
+        </form>
+        </Paper>
+      </div>
       );
   }
 }
