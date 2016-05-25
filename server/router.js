@@ -1,12 +1,12 @@
 const Authentication = require('./controllers/authentication');
-const passportServices = ('./services/passport');
+const passportService = ('./services/passport');
 const passport = require('passport');
 const path = require('path');
 
-const requireAuth = passport.authenticate('jwt', {session: false});
-
+const requireAuth = passport.authenticate('jwt', { session: false });
 
 module.exports = function(app, io) {
+	
   app.get('/', function(req, res) {
   	res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
@@ -39,4 +39,5 @@ module.exports = function(app, io) {
   app.get('/*', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
+
 }
