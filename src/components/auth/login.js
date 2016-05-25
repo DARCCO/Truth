@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import * as actions from '../../actions';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 class Login extends Component {
   handleFormSubmit({username, password}) {
@@ -23,17 +26,15 @@ class Login extends Component {
       <div>
       <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
       <fieldset className= 'form-group'>
-        <label>Username:</label>
-        <input {...username} className= 'form-control'/>
+        <TextField halfWidth hintText= 'Username' { ...username }/>
       </fieldset>
       <fieldset className= 'form-group'>
-        <label>Password:</label>
-        <input {...password} type='password' className= 'form-control'/>
+        <TextField halfWidth hintText= 'Password' { ...password }/>
       </fieldset>
       {this.renderErrorAlert()}
-      <button action= 'submit' className= 'btn btn-primary'>Login</button>
+      <RaisedButton type='submit' label= 'Login' primary= {true}/>      
       <Link to= '/signup'>
-        Sign Up
+       <FlatButton label='Sign up' secondary= {true} />
       </Link>
       </form>
       </div>
