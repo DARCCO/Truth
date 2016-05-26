@@ -25,7 +25,7 @@ class Login extends Component {
   render() {
     const { handleSubmit, fields: { username, password } }= this.props;
     const style = {
-      height: 700
+      height: 750
     };
     return (
       <div>

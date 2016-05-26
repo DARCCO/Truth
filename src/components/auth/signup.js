@@ -23,7 +23,7 @@ class Signup extends Component {
   }
   render() {
     const style = {
-      height: 700
+      height: 750
     };
       const { handleSubmit, fields: { username, password, passwordConfirm }} = this.props;
     return (

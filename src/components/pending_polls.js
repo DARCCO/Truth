@@ -47,7 +47,7 @@ class PendingPolls extends Component {
   render() {
     return (
       <div>
-      <Header />
+      <Header value= {2}/>
       {_.map(this.props.pendingPolls, this.renderPendingPolls)}
       </div>
     );
