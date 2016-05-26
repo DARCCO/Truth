@@ -6,7 +6,6 @@ import { PieChart } from 'react-d3-basic';
 import _ from 'lodash';
 import Header from './header.js';
 import Paper from 'material-ui/Paper';
-import { GridList, GridTile } from 'material-ui/GridList';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class ResultsPolls extends Component {
