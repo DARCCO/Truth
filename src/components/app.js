@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <div>
         <Link to="/" className="text-center">
-          <AppBar title='Truth'/>
+          <AppBar showMenuIconButton= {false} title='Truth'/>
         </Link>
         {this.props.children}
       </div>

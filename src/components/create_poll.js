@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { reduxForm } from 'redux-form';
 import { createPoll } from '../actions/index';
+import Header from './header';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+
 
 class CreatePoll extends Component {
   constructor(props) {
@@ -22,10 +27,14 @@ class CreatePoll extends Component {
 
   render() {
     const { fields: { picture, question, answer1, answer2, answer3, answer4 }, handleSubmit } = this.props;
+    const style = {
+      height: 750
+    };
 
     return (
       <div>
-          <h3 className="text-center">Create A New Poll</h3>
+      <Header value= {4}/>
+        <Paper style= {style} zDepth= {4}>
           <div className="col-md-12">
         <div className="col-md-6">
       <Dropzone onDrop={this.onDrop} accept="image/*">
@@ -45,41 +54,30 @@ class CreatePoll extends Component {
 
 
           <div className="form-group">
-            <label>Question</label>
-            <input type="text" className="form-control" {...question} />
-            <div className="text-help error-color">
-              {question.error}
-            </div>
+          <TextField fullWidth hintText= 'Question' { ...question }/>
+          {question.touched && question.error && <div className= 'error'>{question.error}</div>}
           </div>
 
           <div className="form-group">
-            <label>Answer 1</label>
-            <input type="text" className="form-control" {...answer1} />
-            <div className="text-help error-color">
-              {answer1.error}
-            </div>
+          <TextField fullWidth hintText= 'Answer 1' { ...answer1 }/>
+          {answer1.touched && answer1.error && <div className= 'error'>{answer1.error}</div>}
           </div>
 
           <div className="form-group">
-            <label>Answer 2</label>
-            <input type="text" className="form-control" {...answer2} />
-            <div className="text-help error-color">
-              {answer2.error}
-            </div>
+          <TextField fullWidth hintText= 'Answer 2' { ...answer2 }/>
+          {answer2.touched && answer2.error && <div className= 'error'>{answer2.error}</div>}
           </div>
 
           <div className="form-group">
-            <label>Answer 3</label>
-            <input type="text" className="form-control" {...answer3} />
+          <TextField fullWidth hintText= 'Answer 3' { ...answer3 }/>
           </div>
 
           <div className="form-group">
-            <label>Answer 4</label>
-            <input type="text" className="form-control" {...answer4} />
+          <TextField fullWidth hintText= 'Answer 4' { ...answer4 }/>
           </div>
-
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <RaisedButton type='submit' label= 'Submit' primary= {true}/>
         </form>
+        </Paper>
       </div>
     );
   }

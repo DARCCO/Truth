@@ -2,26 +2,19 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logoutUser } from '../actions/index'
+import { logoutUser } from '../actions/index';
+import { Tabs, Tab, InkBar } from 'material-ui/Tabs';
+import { tealA400 } from 'material-ui/styles/colors';
 
 class Header extends React.Component {
   render () {
     return (
-    <div>
-      <Link to="/pendingpolls" className="col-md-3 btn btn-primary">
-        Pending Polls
-      </Link>
-      <Link to="/resultspolls" className="col-md-3 btn btn-primary">
-        Results Polls
-      </Link>
-      <Link to="/createpoll" className="col-md-3 btn btn-primary">
-        Create Poll
-      </Link>
-      <Link to="/" onClick= {() => this.props.logoutUser()} className="col-md-3 btn btn-primary">
-        Logout
-      </Link>
-     </div>
-
+      <Tabs value={this.props.value} inkBarStyle= {{background: tealA400}} >  
+        <Tab value={2} label='Pending Polls' containerElement={<Link to='/pendingpolls' />}> </Tab>
+        <Tab value={3} label='Results Polls' containerElement={<Link to='/resultspolls' />}> </Tab>
+        <Tab value={4} label='Create Poll' containerElement={<Link to='/createpoll' />}> </Tab>
+        <Tab value={5} onClick= { ()=> this.props.logoutUser() }label='Logout' containerElement={<Link to='/' />}> </Tab>
+      </Tabs>
     );
   }
 };
