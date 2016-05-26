@@ -5,6 +5,8 @@ import { deletePendingPoll } from '../actions/index';
 import { fetchPolls } from '../actions/index';
 import _ from 'lodash';
 import Header from './header.js';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class PendingPolls extends Component {
   constructor(props) {
@@ -23,7 +25,12 @@ class PendingPolls extends Component {
     var answers = pollsData.answers;
     var pollId= key;
 
+    const style = {
+      height: 200
+    };
+
     return (
+      <Paper zDepth= {2} style= {style}>
         <div key={pollId}>
           <div className="col-md-12">
             <h3 className="text-center">{question}</h3>
@@ -35,12 +42,13 @@ class PendingPolls extends Component {
             { _.map(answers, (answer, key) => {
               return (
                 <div className="col-md-5" >
-                  <button className="btn btn-primary" onClick={ ()=> this.props.deletePendingPoll(pollId) }>{key}</button>
+                  <RaisedButton label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll(pollId) }/>
                 </div>
               );
             })}
           </div>
         </div>
+      </Paper>  
     );
   }
 

@@ -13,7 +13,7 @@ class Header extends React.Component {
         <Tab value={2} label='Pending Polls' containerElement={<Link to='/pendingpolls' />}> </Tab>
         <Tab value={3} label='Results Polls' containerElement={<Link to='/resultspolls' />}> </Tab>
         <Tab value={4} label='Create Poll' containerElement={<Link to='/createpoll' />}> </Tab>
-        <Tab value={5} onClick= { ()=> this.props.logoutUser() }label='Logout' containerElement={<Link to='/logout' />}> </Tab>
+        <Tab value={5} onClick= { ()=> this.props.logoutUser() }label='Logout' containerElement={<Link to='/' />}> </Tab>
       </Tabs>
     );
   }

@@ -7,10 +7,10 @@ import Paper from 'material-ui/Paper';
 class InfoIndex extends Component {
   renderHeader() {
     if (this.props.authenticated){
-      return <Header />
+      return <Header value= {6} />
     }
     else{
-      return <LoginHeader />
+      return <LoginHeader value= {7}  />
     }
   }
 
