@@ -13,9 +13,9 @@ class PendingPolls extends Component {
     this.renderPendingPolls = this.renderPendingPolls.bind(this);
   }
   //need to limit polls to like 20
-  componentWillMount(){
-    this.props.fetchPolls();
-  }
+  // componentWillMount(){
+  //   this.props.fetchPolls();
+  // }
 
   renderPendingPolls(pollsData, key) {
     var photo = pollsData.photo;
@@ -34,7 +34,7 @@ class PendingPolls extends Component {
           <div className="col-md-10 center">
             { _.map(answers, (answer, key) => {
               return (
-                <div className="col-md-5" >
+                <div key={key} className="col-md-5" >
                   <button className="btn btn-primary" onClick={ ()=> this.props.deletePendingPoll(pollId) }>{key}</button>
                 </div>
               );

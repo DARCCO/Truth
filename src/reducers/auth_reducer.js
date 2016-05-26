@@ -6,7 +6,7 @@ export default function(state= {}, action) {
     //need to add user object to state
       return { ...state, loginError: '', signupError: '', authenticated: true};
     case UNAUTH_USER:
-      return { ...state, authenticated: false};
+      return { ...state, authenticated: true};
     case AUTH_ERROR_LOGIN:
       return { ...state, loginError: action.payload};
     case AUTH_ERROR_SIGNUP:

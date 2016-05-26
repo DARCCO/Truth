@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 class InfoIndex extends Component {
   renderHeader() {
-    if (this.props.authenticated){
+    //    if (this.props.authenticated){
+    if (true){
       return <Header />
     }
     else{

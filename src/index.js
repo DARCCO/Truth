@@ -11,15 +11,16 @@ import routes from './routes';
 import promise from 'redux-promise';
 
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk)(createStore);
-
+const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem('token');
 
+//change to if (token)
 if (token) {
   store.dispatch({ type: AUTH_USER });
 }
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
   </Provider>
   , document.querySelector('.container'));

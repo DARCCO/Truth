@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { reduxForm } from 'redux-form';
 import { createPoll } from '../actions/index';
+import Header from './header.js';
 
 class CreatePoll extends Component {
   constructor(props) {
@@ -9,9 +10,15 @@ class CreatePoll extends Component {
     this.state = { files: [] };
 
     this.onDrop = this.onDrop.bind(this);
+    this.removePicture = this.removePicture.bind(this);
+  }
+
+  removePicture() {
+    this.setState({ files: [] });
   }
 
   onDrop(files) {
+    //make sure file is an image file in here
     console.log('this', this);
     this.setState({ files: files });
     this.props.fields.picture.value = files;
@@ -25,24 +32,24 @@ class CreatePoll extends Component {
 
     return (
       <div>
-          <h3 className="text-center">Create A New Poll</h3>
-          <div className="col-md-12">
-        <div className="col-md-6">
-      <Dropzone onDrop={this.onDrop} accept="image/*">
-                    <div>Try dropping some files here, or click to select files to upload.</div>
-      </Dropzone>
-      </div>
-      <div className="col-md-6">
-      {this.state.files.length > 0 ?
-        <div>
-          <h2>Preview of picture:</h2>
-          <img src={this.state.files[0].preview} height="200" />
+        <Header />
+        <h3 className="text-center">Create A New Poll</h3>
+        <div className="row">
+            {this.state.files.length > 0 ?
+              <div className="center">
+                <h2>Preview of picture:</h2>
+                <img src={this.state.files[0].preview} height="200" />
+                <div><button onClick={this.removePicture}>Cancel</button></div>
+              </div>
+            :
+              <div className="col-md-offset-4 col-md-4">
+                <Dropzone onDrop={this.onDrop} accept="image/*">
+                  <div>Try dropping some files here, or click to select files to upload.</div>
+                </Dropzone>
+              </div>}
         </div>
-        : null}
-        </div>
-        </div>
-        <form onSubmit={handleSubmit(this.props.createPoll)}>
 
+        <form onSubmit={handleSubmit(this.props.createPoll)}>
 
           <div className="form-group">
             <label>Question</label>
