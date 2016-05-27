@@ -5,6 +5,8 @@ import { deleteResultsPoll } from '../actions/index';
 import { PieChart } from 'react-d3-basic';
 import _ from 'lodash';
 import Header from './header.js';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class ResultsPolls extends Component {
   //need to limit polls to like 20
@@ -28,18 +30,21 @@ class ResultsPolls extends Component {
     var chartSeries = [];
 
     data.forEach((d) => chartSeries.push({field: d.answer, name: d.answer}));
-
+    const style = {
+      height: 500
+    };
     console.log('this.props inside resultspolls', this.props);
     return (
+      <Paper zDepth= {2} style= {style}>
       <div key={key}>
-        <div className="col-md-12">
+        <div >
           <h3 className="text-center">{question}</h3>
-          <button onClick= { () => this.props.deleteResultsPoll(pollId) }>Delete Poll</button>
+          <RaisedButton label= 'Delete Poll' onClick= { () => this.props.deleteResultsPoll(pollId) } primary= {true}/>
         </div>
-        <div className="col-md-2">
+        <div >
           <img src= {photo}/>
         </div>
-        <div className="col-md-10 center">
+        <div >
           <PieChart
           data= {data}
           width= {width}
@@ -50,13 +55,14 @@ class ResultsPolls extends Component {
           />
         </div>
       </div>
+        </Paper>
     );
   }
 
   render() {
     return (
       <div>
-        <Header />
+        <Header value= {3}/>
         <div>
           {_.map(this.props.resultsPolls, this.renderResultsPolls)}
         </div>

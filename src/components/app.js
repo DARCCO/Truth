@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import AppBar from 'material-ui/AppBar';
 
 var socket = io();
 socket.on('news', function (data) {
@@ -16,7 +17,7 @@ export default class App extends Component {
     return (
       <div>
         <Link to="/" className="text-center">
-          <h1>Truth</h1>
+          <AppBar showMenuIconButton= {false} title='Truth'/>
         </Link>
         {this.props.children}
       </div>

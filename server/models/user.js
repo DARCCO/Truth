@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt-nodejs')
 
 // define our model
 const userSchema = new Schema({
-  // email prop has obj to determine it is unique email
+  // username prop has obj to determine it is unique username
   // and to make tolowercase
-  email: { type: String, unique: true, lowercase: true },
+  username: { type: String, unique: true, lowercase: true },
   password: String
 });
 
@@ -14,7 +14,7 @@ const userSchema = new Schema({
 // before saving a model, run this function
 userSchema.pre('save', function(next) {
   // get access to the user model
-  const user = this; // user.email, user.password
+  const user = this; // user.username, user.password
   
   // generate a salt, then run callback
   bcrypt.genSalt(10, function (err, salt) {

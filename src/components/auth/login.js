@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import * as actions from '../../actions';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import LoginHeader from './login_header';
+import Paper from 'material-ui/Paper';
 
 class Login extends Component {
   handleFormSubmit({username, password}) {
@@ -19,23 +24,27 @@ class Login extends Component {
   }
   render() {
     const { handleSubmit, fields: { username, password } }= this.props;
+    const style = {
+      height: 750
+    };
     return (
       <div>
-      <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
-      <fieldset className= 'form-group'>
-        <label>Username:</label>
-        <input {...username} className= 'form-control'/>
-      </fieldset>
-      <fieldset className= 'form-group'>
-        <label>Password:</label>
-        <input {...password} type='password' className= 'form-control'/>
-      </fieldset>
-      {this.renderErrorAlert()}
-      <button action= 'submit' className= 'btn btn-primary'>Login</button>
-      <Link to= '/signup'>
-        Sign Up
-      </Link>
-      </form>
+        <LoginHeader value ={0} />
+        <Paper style= {style} zDepth= {4}>
+        <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
+        <fieldset className= 'form-group'>
+          <TextField halfWidth hintText= 'Username' { ...username }/>
+        </fieldset>
+        <fieldset className= 'form-group'>
+          <TextField halfWidth hintText= 'Password' { ...password }/>
+        </fieldset>
+        {this.renderErrorAlert()}
+        <RaisedButton type='submit' label= 'Login' primary= {true}/>      
+        <Link to= '/signup'>
+         <FlatButton label='Sign up' secondary= {true} />
+        </Link>
+        </form>
+        </Paper>
       </div>
     );
   }

@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Tabs, Tab, InkBar } from 'material-ui/Tabs';
+import { tealA400 } from 'material-ui/styles/colors';
 
 class LoginHeader extends React.Component {
   render (){
     return (
-      <div>
-        <Link to= '/login' className="col-md-6 btn btn-primary">
-          Login
-        </Link>
-        <Link to= '/signup' className="col-md-6 btn btn-primary">
-          Signup
-        </Link>
-      </div>
+      <Tabs value={this.props.value} inkBarStyle= {{background: tealA400}} >  
+        <Tab value={0} label='Login' containerElement={<Link to='/login' />}> </Tab>
+        <Tab value={1} label='Sign Up' containerElement={<Link to='/signup' />}> </Tab>
+      </Tabs>
     );
   }
 }
