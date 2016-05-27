@@ -7,16 +7,21 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
-
 class CreatePoll extends Component {
   constructor(props) {
     super(props);
     this.state = { files: [] };
 
     this.onDrop = this.onDrop.bind(this);
+    this.removePicture = this.removePicture.bind(this);
+  }
+
+  removePicture() {
+    this.setState({ files: [] });
   }
 
   onDrop(files) {
+    //make sure file is an image file in here
     console.log('this', this);
     this.setState({ files: files });
     this.props.fields.picture.value = files;
@@ -34,24 +39,22 @@ class CreatePoll extends Component {
     return (
       <div>
       <Header value= {4}/>
-        <Paper style= {style} zDepth= {4}>
-          <div className="col-md-12">
-        <div className="col-md-6">
-      <Dropzone onDrop={this.onDrop} accept="image/*">
-                    <div>Try dropping some files here, or click to select files to upload.</div>
-      </Dropzone>
-      </div>
-      <div className="col-md-6">
-      {this.state.files.length > 0 ?
-        <div>
-          <h2>Preview of picture:</h2>
-          <img src={this.state.files[0].preview} height="200" />
-        </div>
-        : null}
-        </div>
+      <Paper style= {style} zDepth= {4}>
+        <div className="col-md-12">
+            {this.state.files.length > 0 ?
+              <div>
+                <h2>Preview of picture:</h2>
+                <img src={this.state.files[0].preview} height="200" />
+              </div>
+            :
+              <div className="col-md-offset-4 col-md-4">
+                <Dropzone onDrop={this.onDrop} accept="image/*">
+                  <div>Try dropping some files here, or click to select files to upload.</div>
+                </Dropzone>
+              </div>
+            }
         </div>
         <form onSubmit={handleSubmit(this.props.createPoll)}>
-
 
           <div className="form-group">
           <TextField fullWidth hintText= 'Question' { ...question }/>
@@ -77,7 +80,7 @@ class CreatePoll extends Component {
           </div>
           <RaisedButton type='submit' label= 'Submit' primary= {true}/>
         </form>
-        </Paper>
+      </Paper>
       </div>
     );
   }

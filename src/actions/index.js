@@ -111,6 +111,9 @@ export function createPoll(props) {
   // {
   //   headers: {authorization: localStorage.getItem('token') }
   // }
+  console.log('inside createpoll action creator');
+  const request = null;
+  axios.post('/createPoll', {createPoll: 'testing axios post create poll'});
   return {
     type: CREATE_POLL,
     payload: request

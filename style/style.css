@@ -8,5 +8,11 @@
 
 .center {
   align-content: center;
+  display: block;
+  margin: auto;
   text-align: center;
+}
+
+.auto-margin {
+  margin: auto;
 }

@@ -7,12 +7,15 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
+const server = http.createServer(app);
+const io = require('socket.io')(server);
+
 
 
 
 // DB setup --> connects our db to our code
 
-mongoose.connect('mongodb://127.0.0.1:auth/auth');
+mongoose.connect('mongodb://127.0.0.1:auth/hello');
 
 // App setup
 
@@ -21,12 +24,19 @@ mongoose.connect('mongodb://127.0.0.1:auth/auth');
 // bodyParser puts all requests into json
 app.use(morgan('combined'))
 app.use(bodyParser.json({type: '*/*'}))
-router(app);
+router(app, io);
 
 
 // Server setup
 
 const port = process.env.PORT || 3090;
-const server = http.createServer(app);
+
+io.on('connection', function(socket){
+  console.log('connected io');
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
 server.listen(port);
 console.log('Server listening on: ' + port);

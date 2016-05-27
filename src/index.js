@@ -14,9 +14,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {green100, green500, purple500, pink500, purpleA400} from 'material-ui/styles/colors';
 
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk)(createStore);
-
+const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem('token');
 
+//change to if (token)
 if (token) {
   store.dispatch({ type: AUTH_USER });
 }
@@ -33,8 +34,8 @@ const muiTheme = getMuiTheme({
 });
 
 ReactDOM.render(
-  <MuiThemeProvider muiTheme={muiTheme}>	
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
+  <MuiThemeProvider muiTheme={muiTheme}>
     <Router history={browserHistory} routes={routes} />
   </Provider>
   </MuiThemeProvider>

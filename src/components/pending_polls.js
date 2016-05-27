@@ -15,9 +15,9 @@ class PendingPolls extends Component {
     this.renderPendingPolls = this.renderPendingPolls.bind(this);
   }
   //need to limit polls to like 20
-  componentWillMount(){
-    this.props.fetchPolls();
-  }
+  // componentWillMount(){
+  //   this.props.fetchPolls();
+  // }
 
   renderPendingPolls(pollsData, key) {
     var photo = pollsData.photo;
@@ -48,7 +48,7 @@ class PendingPolls extends Component {
             })}
           </div>
         </div>
-      </Paper>  
+      </Paper>
     );
   }
 
