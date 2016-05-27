@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs')
 
-const userSchema = new Schema({
+const pollSchema = new Schema({
 
   photo: { data: Buffer, contentType: String },
   question: { type: String, lowercase: true },
@@ -27,12 +27,7 @@ const userSchema = new Schema({
 
 });
 
-// this saves a poll... not sure if needed
-userSchema.pre('save', function(next) {
-  const user = this;
-}
-
-const PollClass = mongoose.model('poll', userSchema);
+const PollClass = mongoose.model('poll', pollSchema);
 
 module.exports = PollClass;
 

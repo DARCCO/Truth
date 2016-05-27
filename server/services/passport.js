@@ -1,4 +1,4 @@
-const passport = require('passport');
+module.exports = function(passport){
 const User = require('../models/user');
 const config = require('../config');
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -6,14 +6,23 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 // Setup options for JWT Strategy
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeader(),
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: config.secret
 };
+
+passport.serializeUser(function(user, done){
+  done(null, user.id)
+});
+
+passport.deserializeUser(function(user, done){
+  done(null, user.id)
+});
 
 // Create JWT strategy                      // payload is the decoded token
 //                                          // will have username and time stamp
 passport.use( new JwtStrategy(jwtOptions, function(payload, done) {
   User.findOne({ id: payload.sub }, function(err, user) {
+    // console.log('- - - - - - - - -payload: ', payload)
   	if (err) { 
       return done(err, false); 
     }
@@ -24,4 +33,5 @@ passport.use( new JwtStrategy(jwtOptions, function(payload, done) {
   	}
   });
 }));
+}
 
