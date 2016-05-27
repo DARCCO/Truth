@@ -1,4 +1,13 @@
-import { FETCH_POLLS, DELETE_PENDING_POLL, DELETE_RESULTS_POLL, CREATE_POLL } from '../actions/index';
+
+import {
+  FETCH_POLLS,
+  DELETE_PENDING_POLL,
+  DELETE_RESULTS_POLL,
+  CREATE_POLL,
+  ADD_CREATED_POLL,
+  UPDATE_RESULTS_POLLS,
+  UPDATE_PENDING_POLLS
+} from '../actions/index';
 
 const INITIAL_STATE = {
   pending: {
@@ -102,6 +111,43 @@ export default function(state = INITIAL_STATE, action) {
       var stateCopy = Object.assign({}, state);
       stateCopy.created = stateCreatedCopy;
       return stateCopy;
+<<<<<<< c7055e30717086bd4349608e2998aa2875635ee9
+=======
+    case ADD_CREATED_POLL:
+      console.log('Add Created Poll');
+      if (state.user.username === action.payload.poll.createdBy){
+        var statePendingCopy= Object.assign({}, state.pending);
+        statePendingCopy[action.payload.pollId]= action.payload.poll;
+        var stateCopy= Object.assign({}, state);
+        stateCopy.pending= statePendingCopy;
+        console.log(stateCopy);
+        return stateCopy;
+      }else{
+        return state;
+      }
+    case UPDATE_RESULTS_POLLS:
+      if (action.payload.pollId in state.user.created){
+        var stateCreatedCopy= Object.assign({}, state.created);
+        stateCreatedCopy[action.payload.pollId]= action.payload.poll;
+        var stateCopy= Object.assign({}, state);
+        stateCopy.created= stateCreatedCopy;
+        console.log(stateCopy);
+        return stateCopy;
+      }else{
+        return state;
+      }
+    case UPDATE_PENDING_POLLS:
+      if (action.payload.pollId in state.user.pending){
+        var stateCreatedCopy= Object.assign({}, state.created);
+        delete stateCreatedCopy[action.payload.pollId]
+        var stateCopy= Object.assign({}, state);
+        stateCopy.created= stateCreatedCopy;
+        console.log(stateCopy);
+        return stateCopy;
+      }else{
+        return state;
+      } 
+>>>>>>> [Add] Adds Sockets functionality to client-side
     default:
       return state;
   }

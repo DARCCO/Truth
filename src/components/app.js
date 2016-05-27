@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import AppBar from 'material-ui/AppBar';
-
-var socket = io();
-socket.on('news', function (data) {
-  console.log(data);
-  socket.emit('my other event', { my: 'data' });
-});
-socket.on('createdpoll', function(data) {
-  console.log('data createpoll socket.on:', data);
-});
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addCreatedPoll } from '../actions/index';
 
 export default class App extends Component {
 
   render() {
+
     return (
       <div>
         <Link to="/" className="text-center">
@@ -24,3 +19,5 @@ export default class App extends Component {
     );
   }
 }
+
+
