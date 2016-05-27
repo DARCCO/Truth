@@ -3,6 +3,14 @@ const User = require('../models/user');
 const config = require('../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+const LocalStrategy = require('passport-local');
+
+// Create local strategy
+const localOptions = { usernameField: 'email' };
+const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
+
+});
+
 
 // Setup options for JWT Strategy
 const jwtOptions = {
@@ -23,8 +31,8 @@ passport.deserializeUser(function(user, done){
 passport.use( new JwtStrategy(jwtOptions, function(payload, done) {
   User.findOne({ id: payload.sub }, function(err, user) {
     // console.log('- - - - - - - - -payload: ', payload)
-  	if (err) { 
-      return done(err, false); 
+  	if (err) {
+      return done(err, false);
     }
   	if (user) {
   	  done(null, user);

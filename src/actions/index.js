@@ -11,6 +11,7 @@ export const AUTH_ERROR_LOGIN = 'AUTH_ERROR_LOGIN';
 export const AUTH_ERROR_SIGNUP = 'AUTH_ERROR_SIGNUP';
 
 export function loginUser({ username, password }) {
+  console.log('inside loginUser action/index.js:', username, password);
   return function(dispatch) {
     axios.post('/login', {username: username, password: password})
     .then( response => {
@@ -62,6 +63,7 @@ export function authErrorSignup(error) {
 }
 
 export function fetchPolls() {
+  console.log('fetch polls action creator');
   const request = axios.get('/polls', {
     headers: {authorization: localStorage.getItem('token') }
   }) //axios request

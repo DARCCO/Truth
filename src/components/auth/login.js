@@ -11,7 +11,6 @@ import Paper from 'material-ui/Paper';
 class Login extends Component {
   handleFormSubmit({username, password}) {
     this.props.loginUser({ username, password });
-    console.log(username, password);
   }
   renderErrorAlert(){
     if (this.props.errorMessage){
@@ -39,7 +38,7 @@ class Login extends Component {
           <TextField halfWidth hintText= 'Password' { ...password }/>
         </fieldset>
         {this.renderErrorAlert()}
-        <RaisedButton type='submit' label= 'Login' primary= {true}/>      
+        <RaisedButton type='submit' label= 'Login' primary= {true}/>
         <Link to= '/signup'>
          <FlatButton label='Sign up' secondary= {true} />
         </Link>

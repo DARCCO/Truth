@@ -8,7 +8,7 @@ const path = require('path');
 const requireAuth = passport.authenticate('jwt', { session: false });
 
 module.exports = function(app, io) {
-	
+
   app.use(session({secret: 'asldkhfnpqwe'}));
   app.use(passport.initialize());
   app.use(passport.session());
@@ -29,7 +29,10 @@ module.exports = function(app, io) {
     res.sendFile(path.resolve(__dirname + '/../node_modules/socket.io/node_modules/socket.io-client/socket.io.js'))
   });
 
-  app.post('/login', CreatePoll.createPoll);
+  app.post('/login', function(req, res) {
+    console.log('inside /login route on server');
+    console.log('req.body', req.body);
+  });
 
   // app.post('/createPoll', function(req, res) {
   //   console.log('inside server /createPoll');
@@ -40,7 +43,7 @@ module.exports = function(app, io) {
   // THESE ARE OFFICIAL DATABAS-READY POSTS - - - - - - - >>>>
 
   app.post('/signup', Authentication.signup);
-  
+
   app.post('/createpoll', CreatePoll.createPoll);
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

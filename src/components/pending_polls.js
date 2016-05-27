@@ -41,7 +41,7 @@ class PendingPolls extends Component {
           <div className="col-md-10 center">
             { _.map(answers, (answer, key) => {
               return (
-                <div className="col-md-5" >
+                <div key={key} className="col-md-5" >
                   <RaisedButton label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll(pollId) }/>
                 </div>
               );
