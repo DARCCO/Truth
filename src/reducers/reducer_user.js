@@ -2,6 +2,10 @@ import { FETCH_POLLS } from '../actions/index';
 import { DELETE_PENDING_POLL } from '../actions/index';
 import { DELETE_RESULTS_POLL } from '../actions/index';
 import { CREATE_POLL } from '../actions/index';
+import { ADD_CREATED_POLL } from '../actions/index';
+import { UPDATE_RESULTS_POLLS } from '../actions/index';
+import { UPDATE_PENDING_POLLS } from '../actions/index';
+
 
 const INITIAL_STATE = {
 
@@ -100,14 +104,46 @@ export default function(state = INITIAL_STATE, action) {
       var stateCopy = Object.assign({}, state);
       stateCopy.pending= statePendingCopy;
       return stateCopy;
-
     case DELETE_RESULTS_POLL:
       const stateCreatedCopy= Object.assign({}, state.created);
       delete stateCreatedCopy[action.payload];
       var stateCopy = Object.assign({}, state);
       stateCopy.created= stateCreatedCopy;
       return stateCopy;
-
+    case ADD_CREATED_POLL:
+      console.log('Add Created Poll');
+      if (state.user.username === action.payload.poll.createdBy){
+        var statePendingCopy= Object.assign({}, state.pending);
+        statePendingCopy[action.payload.pollId]= action.payload.poll;
+        var stateCopy= Object.assign({}, state);
+        stateCopy.pending= statePendingCopy;
+        console.log(stateCopy);
+        return stateCopy;
+      }else{
+        return state;
+      }
+    case UPDATE_RESULTS_POLLS:
+      if (action.payload.pollId in state.user.created){
+        var stateCreatedCopy= Object.assign({}, state.created);
+        stateCreatedCopy[action.payload.pollId]= action.payload.poll;
+        var stateCopy= Object.assign({}, state);
+        stateCopy.created= stateCreatedCopy;
+        console.log(stateCopy);
+        return stateCopy;
+      }else{
+        return state;
+      }
+    case UPDATE_PENDING_POLLS:
+      if (action.payload.pollId in state.user.pending){
+        var stateCreatedCopy= Object.assign({}, state.created);
+        delete stateCreatedCopy[action.payload.pollId]
+        var stateCopy= Object.assign({}, state);
+        stateCopy.created= stateCreatedCopy;
+        console.log(stateCopy);
+        return stateCopy;
+      }else{
+        return state;
+      } 
     default:
       return state;
   }
