@@ -8,6 +8,12 @@ const userSchema = new Schema({
   // and to make tolowercase
   username: { type: String, unique: true, lowercase: true },
   password: String,
+  // photo: { data: Buffer, contentType: String },
+  // city: String,
+  // country: String,
+  // friends: [String],
+  pending: [String],
+  created: [String]
   
 });
 
