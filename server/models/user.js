@@ -7,7 +7,8 @@ const userSchema = new Schema({
   // username prop has obj to determine it is unique username
   // and to make tolowercase
   username: { type: String, unique: true, lowercase: true },
-  password: String
+  password: String,
+  
 });
 
 // On save Hook, encrypt password

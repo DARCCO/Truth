@@ -8,7 +8,7 @@
 
 ###WORKFLOW
 
-
+0) Make sure you set upstream: `git remote add upstream 'upstream html'`
 
 1) before working on any branches, type `git pull --rebase upstream dev` to make sure you are working with the most recent, up to date, version. This requires you to already have the upstream set.
 
