@@ -3,7 +3,6 @@ const Poll = require('../models/poll');
 
 
 exports.createPoll = function(req, res, next) {
-  console.log('called - - - - - - - - - ')
   const photo = req.body.photo;
   const question = req.body.question;
   const answers = req.body.answers;
@@ -12,8 +11,6 @@ exports.createPoll = function(req, res, next) {
   if (!question || !answers) {
   	res.status(422).send({ error: "You must provide a photo, question, and answers" });
   }
-
-  console.log('- - - - - - - - - - - - - - - -')
 
   // if poll already exists, can't make it
   Poll.findOne( {question: question}, function(err, existingPoll) {
@@ -54,7 +51,7 @@ exports.createPoll = function(req, res, next) {
     });
 
     // socket emitting
-    io.sockets.emit('createpoll', { it: 'worked' });
+    // io.sockets.emit('createpoll', { it: 'worked' });
     res.json({ status: 'poll entered into database!' });
 
 

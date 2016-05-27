@@ -29,20 +29,21 @@ module.exports = function(app, io) {
     res.sendFile(path.resolve(__dirname + '/../node_modules/socket.io/node_modules/socket.io-client/socket.io.js'))
   });
 
-  app.post('/login', function(req, res) {
-
-  } );
+  app.post('/login', CreatePoll.createPoll);
 
   // app.post('/createPoll', function(req, res) {
   //   console.log('inside server /createPoll');
   //   console.log('req.body', req.body);
   //   io.sockets.emit('createpoll', { it: 'worked' });
-  //   res.send({});
   // })
+
+  // THESE ARE OFFICIAL DATABAS-READY POSTS - - - - - - - >>>>
 
   app.post('/signup', Authentication.signup);
   
   app.post('/createpoll', CreatePoll.createPoll);
+
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
   app.get('/*', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../index.html'));

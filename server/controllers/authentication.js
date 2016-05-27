@@ -13,9 +13,11 @@ function tokenForUser(user) {
 exports.signup = function(req, res, next) {
   const username = req.body.username;
   const password = req.body.password;
+  // const photo = req.body.photo;
+  console.log(photo)
 
   if ( !username || !password ) {
-  	return res.status(422).send({ error: 'You must provide username and password' })
+  	return res.status(422).send({ error: 'You must provide username, password, and photo' })
   }
 
   // see if a user with a given username exists
@@ -34,7 +36,10 @@ exports.signup = function(req, res, next) {
 
   	const user = new User ({
   	  username: username,
-  	  password: password
+  	  password: password,
+      // photo: photo,
+      pending: [],
+      created: []
   	})
 
   	user.save(function(err){
