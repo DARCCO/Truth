@@ -17,7 +17,7 @@ export function loginUser({ username, password }) {
     axios.post('/signin', { username, password })
       .then( response => {
         //need to add payload to AUTH_USER dispatch that contains user object
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/pendingpolls');
       })
@@ -28,12 +28,10 @@ export function loginUser({ username, password }) {
 }
 
 export function signupUser({ username, password }) {
-  console.log('inside singupUser with user/pass', username, password);
   return function(dispatch) {
     axios.post('/signup', { username, password })
       .then( response => {
-        //need to add payload to AUTH_USER dispatch that contains user object
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/pendingpolls');
       })
@@ -131,38 +129,18 @@ export function deleteResultsPoll(pollId) {
         console.log('response.data in .catch deleteResultsPoll:', response.data);
       });
   }
-  // axios.delete('/resultspolls', pollId, {
-  //   headers: {authorization: localStorage.getItem('token') }
-  // })
-  // .then(function(res){
-  //   console.log(res);
-  // }).catch(function(err){
-  //   console.error(err);
-  // });
-
-<<<<<<< c7055e30717086bd4349608e2998aa2875635ee9
-  // return {
-  //   type: DELETE_RESULTS_POLL,
-  //   payload: pollId
-  // };
-=======
-  //axios.delete('/resultspolls', {resultsPoll: 'testing axios results poll'});
-
-  return {
-    type: DELETE_RESULTS_POLL,
-    payload: pollId
-  };
->>>>>>> [Add] Adds Sockets functionality to client-side
-
 }
 
 export function createPoll(props) {
+  console.log('createpoll props inside action creator', props);
   console.log('inside createpoll action creator');
   return function(dispatch) {
+    console.log('right before axios.post(createpoll)');
     axios.post('/createpoll', props, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
+        console.log('props inside .then', props);
         console.log('response.data in .then createPoll:', response.data);
         // dispatch({
         //   type: CREATE_POLL,
@@ -173,26 +151,6 @@ export function createPoll(props) {
         console.log('response.data in .catch createPoll:', response.data);
       });
   }
-  //POST request must include JWT authorization in headers-- see other action creators for examples
-  //const request = null //axios request
-  // {
-  //   headers: {authorization: localStorage.getItem('token') }
-  // }
-<<<<<<< c7055e30717086bd4349608e2998aa2875635ee9
-  // const request = null;
-  // axios.post('/createPoll', {createPoll: 'testing axios post create poll'});
-  // return {
-  //   type: CREATE_POLL,
-  //   payload: request
-  // };
-=======
-  console.log('inside createpoll action creator');
-  const request = null;
-  axios.post('/createPoll', {createPoll: 'testing axios post create poll'});
-  return {
-    type: CREATE_POLL,
-    payload: request
-  };
 }
 
 export function addCreatedPoll(data) {
@@ -215,5 +173,4 @@ export function updatePendingPolls(data) {
     type: UPDATE_PENDING_POLLS,
     payload: data
   }
->>>>>>> [Add] Adds Sockets functionality to client-side
 }

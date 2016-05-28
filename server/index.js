@@ -32,7 +32,7 @@ router(app, io);
 
 // Server setup
 
-const port = process.env.PORT || 3090;
+const port = process.env.PORT || 3050;
 
 io.on('connection', function(socket){
   console.log('connected io');

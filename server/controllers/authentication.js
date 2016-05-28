@@ -1,6 +1,8 @@
 const jwt = require('jwt-simple');
 const User = require('../models/user');
+const Poll = require('../models/poll');
 const config = require('../config');
+const mongoose = require('mongoose');
 
 function tokenForUser(user) {
   // sub is a convention, jwt tokens have sub, short for subject
@@ -39,21 +41,63 @@ exports.signup = function(req, res, next) {
 
   	// if username does NOT exist
 
-  	  // create and save our record
+  	// create and save our record
+    // with all current pending ids
+    const user = new User ({
+        username: username,
+        password: password,
+        // photo: photo,
+        pending: {},
+        created: {}
+    });
 
-  	const user = new User ({
-  	  username: username,
-  	  password: password
-      // photo: photo,
-      //pending: [],
-      //created: []
-  	});
+    console.log('this is user:', user);
 
     // respond to request indicating user was created
     user.save(function(err){
       if (err) { return next(err); }
 
-      res.json({ token: tokenForUser(user) });
+      Poll.find({}, function(err, polls) {
+        const arrayOfObjectIDs = [];
+        const objectOfPendingIDs = polls.reduce(function(accu, curr) {
+          accu[curr.id] = curr.id;
+          arrayOfObjectIDs.push( mongoose.Types.ObjectId(curr.id) );
+          return accu;
+        }, {});
+
+        User.findOneAndUpdate({ username: username }, { pending: objectOfPendingIDs }, { new: true }, function(err, user) {
+          if (err) { return next(err); }
+          console.log('user inside findoneandupdate callback', user);
+        });
+        console.log('arrayOfObjectIDs', arrayOfObjectIDs);
+        Poll.find({
+          "_id" : { $in: arrayOfObjectIDs }
+        }, function(err, docs) {
+          console.log('this should be all the polls', docs);
+          const pending = docs.reduce(function(accu, curr) {
+            accu[curr.id] = curr;
+            return accu;
+          }, {});
+          console.log('pending', pending);
+          res.json({
+            user: {
+              username: username,
+              pending: pending,
+              created: {}
+            },
+            token: tokenForUser(user)
+          });
+        });
+        // res.send(polls.reduce(function(pollMap, item) {
+        //   pollMap[item.id] = item;
+        //   return pollMap;
+        // }, {}));
+      });
+
+      // res.json({
+      //   //user: user,
+      //   token: tokenForUser(user)
+      // });
     });
   });
 }

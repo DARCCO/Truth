@@ -26,8 +26,8 @@ module.exports = function(app, io) {
     res.sendFile(path.resolve(__dirname + '/../style/style.css'));
   });
 
-  app.get('/node_modules/socket.io-client/socket.io.js', function(req, res) {
-    res.sendFile(path.resolve(__dirname + '/../node_modules/socket.io-client/socket.io.js'))
+  app.get('/node_modules/socket.io/node_modules/socket.io-client/socket.io.js', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../node_modules/socket.io/node_modules/socket.io-client/socket.io.js'))
   });
 
   app.post('/signin', requireSignin, Authentication.signin);
@@ -76,11 +76,11 @@ module.exports = function(app, io) {
 
   app.post('/signup', Authentication.signup);
 
-  //app.post('/createpoll', CreatePoll.createPoll);
-  app.post('/createpoll', function(req, res) {
-    console.log('inside createpoll server route');
-    console.log('req.body:', req.body);
-  })
+  app.post('/createpoll', CreatePoll.createPoll);
+  // app.post('/createpoll', function(req, res) {
+  //   console.log('inside createpoll server route');
+  //   console.log('req.body:', req.body);
+  // })
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
