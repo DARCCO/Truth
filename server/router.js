@@ -38,6 +38,7 @@ module.exports = function(app, io) {
   // })
 
 
+
   app.post('/createPoll', function(req, res) {
     console.log('inside server /createPoll');
     console.log('req.body', req.body);
