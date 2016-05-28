@@ -7,10 +7,12 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import LoginHeader from './login_header';
 import Paper from 'material-ui/Paper';
+import { cyan100, lightBlue50, teal50 } from 'material-ui/styles/colors';
 
 class Signup extends Component {
   handleFormSubmit(formProps){
     this.props.signUpUser(formProps);
+
   }
   renderAlert(){
     if (this.props.errorMessage) {
@@ -23,24 +25,26 @@ class Signup extends Component {
   }
   render() {
     const style = {
-      height: 750
+      height: 750,
+      //backgroundColor: teal50
     };
       const { handleSubmit, fields: { username, password, passwordConfirm }} = this.props;
     return (
       <div>
         <LoginHeader value={1} />
         <Paper style= {style} zDepth= {4}>
+        <div className= 'centered-Prompt'>
         <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
-          <fieldset className= 'form-group'>
+          <fieldset className= 'form-group' >
             <TextField halfWidth hintText= 'Username' { ...username }/>
             {username.touched && username.error && <div className= 'error'>{username.error}</div>}
           </fieldset>
           <fieldset className= 'form-group'>
-            <TextField halfWidth hintText= 'Password' { ...password }/>
+            <TextField halfWidth type= 'password' hintText= 'Password' { ...password }/>
             {password.touched && password.error && <div className= 'error'>{password.error}</div>}
           </fieldset>
           <fieldset className= 'form-group'>
-            <TextField halfWidth hintText= 'Confirm Password' { ...passwordConfirm }/>
+            <TextField halfWidth type='password' hintText= 'Confirm Password' { ...passwordConfirm }/>
             {passwordConfirm.touched && passwordConfirm.error && <div className= 'error'>{passwordConfirm.error}</div>}
           </fieldset>
           {this.renderAlert()}
@@ -49,6 +53,7 @@ class Signup extends Component {
            <FlatButton label='Login' secondary= {true} />
           </Link>
         </form>
+        </div>
         </Paper>
       </div>
       );

@@ -29,25 +29,31 @@ class PendingPolls extends Component {
       height: 200
     };
 
+    const styleButton= {
+      margin: '2px'
+    }
+
     return (
       <Paper zDepth= {2} style= {style}>
         <div key={pollId}>
           <div className="col-md-12">
             <h3 className="text-center">{question}</h3>
           </div>
+          <div className= 'centered-Pending'>
           <div className="col-md-2">
             <img src= {photo}/>
           </div>
-          <div className="col-md-10 center">
+          <div className="col-md-10 center" >
             { _.map(answers, (answer, key) => {
               return (
                 <div className="col-md-5" >
-                  <RaisedButton label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll(pollId) }/>
+                  <RaisedButton style= {styleButton} label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll(pollId) }/>
                 </div>
               );
             })}
           </div>
-        </div>
+          </div>
+          </div>
       </Paper>
     );
   }
