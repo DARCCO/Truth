@@ -26,9 +26,17 @@
 	padding: 70px;
 }
 
+.centered-Create {
+
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 150px;
+}
+
 
 .centered-Prompt {
-	  display: flex;
+    display: flex;
 
 
   align-items: center;
@@ -37,5 +45,4 @@
   justify-content: center;
 
   min-height: 300px;
-  padding: 150px;
 }
