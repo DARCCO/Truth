@@ -1,4 +1,4 @@
-.error-color {
+.error {
   color: red;
 }
 
@@ -15,4 +15,34 @@
 
 .auto-margin {
   margin: auto;
+}
+
+.container {
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.centered-Pending {
+	
+	padding: 70px;
+}
+
+.centered-Create {
+
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 150px;
+}
+
+
+.centered-Prompt {
+    display: flex;
+
+
+  align-items: center;
+
+
+  justify-content: center;
+
+  min-height: 300px;
 }

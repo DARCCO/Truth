@@ -20,6 +20,12 @@ class CreatePoll extends Component {
     this.setState({ files: [] });
   }
 
+  handleFormSubmit(){
+    this.props.createPoll();
+    //this.removePicture();
+    this.props.resetForm();
+  }
+
   onDrop(files) {
     //make sure file is an image file in here
     console.log('this', this);
@@ -33,53 +39,61 @@ class CreatePoll extends Component {
   render() {
     const { fields: { picture, question, answer1, answer2, answer3, answer4 }, handleSubmit } = this.props;
     const style = {
-      height: 750
+      height: 700
     };
+
+    const styleButton= {
+      width: '20%',
+      //height: '40px'
+    }
+
 
     return (
       <div>
       <Header value= {4}/>
       <Paper style= {style} zDepth= {4}>
-        <div className="col-md-12">
+        <div >
             {this.state.files.length > 0 ?
               <div>
                 <h2>Preview of picture:</h2>
                 <img src={this.state.files[0].preview} height="200" />
               </div>
             :
-              <div className="col-md-offset-4 col-md-4">
+              <div className="col-md-offset-4 col-md-4" >
                 <Dropzone onDrop={this.onDrop} accept="image/*">
                   <div>Try dropping some files here, or click to select files to upload.</div>
                 </Dropzone>
               </div>
             }
         </div>
-        <form onSubmit={handleSubmit(this.props.createPoll)}>
+        <div className= 'centered-Create'>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
           <div className="form-group">
-          <TextField fullWidth hintText= 'Question' { ...question }/>
+          <TextField style ={{width: '80%'}} hintText= 'Question' { ...question }/>
           {question.touched && question.error && <div className= 'error'>{question.error}</div>}
           </div>
 
           <div className="form-group">
-          <TextField fullWidth hintText= 'Answer 1' { ...answer1 }/>
+          <TextField style ={{width: '80%'}} hintText= 'Answer 1' { ...answer1 }/>
           {answer1.touched && answer1.error && <div className= 'error'>{answer1.error}</div>}
           </div>
 
           <div className="form-group">
-          <TextField fullWidth hintText= 'Answer 2' { ...answer2 }/>
+          <TextField style ={{width: '80%'}} hintText= 'Answer 2' { ...answer2 }/>
           {answer2.touched && answer2.error && <div className= 'error'>{answer2.error}</div>}
           </div>
 
           <div className="form-group">
-          <TextField fullWidth hintText= 'Answer 3' { ...answer3 }/>
+          <TextField style ={{width: '80%'}} hintText= 'Answer 3' { ...answer3 }/>
           </div>
 
           <div className="form-group">
-          <TextField fullWidth hintText= 'Answer 4' { ...answer4 }/>
+          <TextField style ={{width: '80%'}} hintText= 'Answer 4' { ...answer4 }/>
           </div>
-          <RaisedButton type='submit' label= 'Submit' primary= {true}/>
+          <RaisedButton style= {styleButton} type='submit' label= 'Submit' primary= {true}/>
         </form>
+      </div>  
       </Paper>
       </div>
     );

@@ -5,6 +5,9 @@ export const FETCH_POLLS = 'FETCH_POLLS';
 export const CREATE_POLL = 'CREATE_POLL';
 export const DELETE_PENDING_POLL = 'DELETE_PENDING_POLL';
 export const DELETE_RESULTS_POLL = 'DELETE_RESULTS_POLL';
+export const ADD_CREATED_POLL = 'ADD_CREATED_POLL';
+export const UPDATE_RESULTS_POLLS = 'UPDATE_RESULTS_POLLS';
+export const UPDATE_PENDING_POLLS= 'UPDATE_PENDING_POLLS';
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
@@ -137,10 +140,19 @@ export function deleteResultsPoll(pollId) {
   //   console.error(err);
   // });
 
+<<<<<<< c7055e30717086bd4349608e2998aa2875635ee9
   // return {
   //   type: DELETE_RESULTS_POLL,
   //   payload: pollId
   // };
+=======
+  //axios.delete('/resultspolls', {resultsPoll: 'testing axios results poll'});
+
+  return {
+    type: DELETE_RESULTS_POLL,
+    payload: pollId
+  };
+>>>>>>> [Add] Adds Sockets functionality to client-side
 
 }
 
@@ -166,10 +178,42 @@ export function createPoll(props) {
   // {
   //   headers: {authorization: localStorage.getItem('token') }
   // }
+<<<<<<< c7055e30717086bd4349608e2998aa2875635ee9
   // const request = null;
   // axios.post('/createPoll', {createPoll: 'testing axios post create poll'});
   // return {
   //   type: CREATE_POLL,
   //   payload: request
   // };
+=======
+  console.log('inside createpoll action creator');
+  const request = null;
+  axios.post('/createPoll', {createPoll: 'testing axios post create poll'});
+  return {
+    type: CREATE_POLL,
+    payload: request
+  };
+}
+
+export function addCreatedPoll(data) {
+  //console.log('inside AddCreatedPoll');
+  return {
+    type: ADD_CREATED_POLL,
+    payload: data
+  };
+}
+
+export function updateResultsPolls(data) {
+  return {
+    type: UPDATE_RESULTS_POLLS,
+    payload: data
+  }
+}
+
+export function updatePendingPolls(data) {
+  return {
+    type: UPDATE_PENDING_POLLS,
+    payload: data
+  }
+>>>>>>> [Add] Adds Sockets functionality to client-side
 }
