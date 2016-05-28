@@ -7,26 +7,26 @@ export default function(ComposedComponent) {
       router: React.PropTypes.object
     }
 
-  componentWillMount() {
-    if (!this.props.authenticated) {
-      this.context.router.push('/');
+    componentWillMount() {
+      if (!this.props.authenticated) {
+        this.context.router.push('/');
+      }
+    }
+
+    componentWillUpdate() {
+      if (!nextProps.authenticated) {
+        this.context.router.push('/');
+      }
+    }
+
+    render() {
+      return <ComposedComponent {...this.props} />
     }
   }
 
-  componentWillUpdate() {
-    if (!nextProps.authenticated) {
-      this.context.router.push('/');
-    }
-  }
-  render() {
-    return <ComposedComponent {...this.props} />
-  }
+  function mapStateToProps(state) {
+    return { authenticated: state.auth.authenticated};
   }
 
-function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated};
-}
-
-return connect(mapStateToProps)(Authentication);
-
+  return connect(mapStateToProps)(Authentication);
 }

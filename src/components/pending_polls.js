@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deletePendingPoll } from '../actions/index';
-import { fetchPolls } from '../actions/index';
+import { deletePendingPoll, fetchPolls } from '../actions/index';
 import _ from 'lodash';
 import Header from './header.js';
 import Paper from 'material-ui/Paper';
@@ -41,7 +40,7 @@ class PendingPolls extends Component {
           <div className="col-md-10 center">
             { _.map(answers, (answer, key) => {
               return (
-                <div className="col-md-5" >
+                <div key={key} className="col-md-5" >
                   <RaisedButton label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll(pollId) }/>
                 </div>
               );

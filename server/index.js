@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 
@@ -15,7 +16,7 @@ const io = require('socket.io')(server);
 
 // DB setup --> connects our db to our code
 
-mongoose.connect('mongodb://127.0.0.1:auth/hello');
+mongoose.connect('mongodb://127.0.0.1:auth/truthdb');
 
 // App setup
 
@@ -23,6 +24,7 @@ mongoose.connect('mongodb://127.0.0.1:auth/hello');
 // morgan logs so we can debug
 // bodyParser puts all requests into json
 app.use(morgan('combined'))
+app.use(cors());
 app.use(bodyParser.json({type: '*/*'}))
 router(app, io);
 
@@ -39,4 +41,4 @@ io.on('connection', function(socket){
   });
 });
 server.listen(port);
-console.log('Server listening on: ' + port);
+console.log('Server listening on:', port);
