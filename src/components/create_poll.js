@@ -20,24 +20,25 @@ class CreatePoll extends Component {
     this.setState({ files: [] });
   }
 
-  handleFormSubmit(){
-    this.props.createPoll();
-    //this.removePicture();
-    this.props.resetForm();
-  }
-
   onDrop(files) {
     //make sure file is an image file in here
     console.log('this', this);
     this.setState({ files: files });
-    this.props.fields.picture.value = files;
+    // this.props.fields.picture = files;
     console.log('files:', files);
     console.log('this.props',this.props);
     console.log('state', this.state)
   }
 
+  handleFormSubmit({ question, answer1, answer2, answer3, answer4 }) {
+    console.log('this.state.files before createpoll AC', this.state.files);
+    this.props.createPoll({ question, answer1, answer2, answer3, answer4, username: this.props.username, createdAt: new Date(), photo: this.state.files });
+    this.removePicture();
+    this.props.resetForm();
+  }
+
   render() {
-    const { fields: { picture, question, answer1, answer2, answer3, answer4 }, handleSubmit } = this.props;
+    const { fields: { question, answer1, answer2, answer3, answer4 }, handleSubmit } = this.props;
     const style = {
       height: 700
     };
@@ -52,11 +53,12 @@ class CreatePoll extends Component {
       <div>
       <Header value= {4}/>
       <Paper style= {style} zDepth= {4}>
-        <div >
+        <div>
             {this.state.files.length > 0 ?
               <div>
                 <h2>Preview of picture:</h2>
                 <img src={this.state.files[0].preview} height="200" />
+                <button onClick={this.removePicture}>Remove</button>
               </div>
             :
               <div className="col-md-offset-4 col-md-4" >
@@ -93,7 +95,7 @@ class CreatePoll extends Component {
           </div>
           <RaisedButton style= {styleButton} type='submit' label= 'Submit' primary= {true}/>
         </form>
-      </div>  
+      </div>
       </Paper>
       </div>
     );
@@ -121,8 +123,9 @@ function validate(values) {
 //connect: first argument is mapStateToProps, 2nd is mapDispatchToProps
 //reduxForm: 1st is form config, 2nd is mapStateToProps, 3r is mapDispatchToProps
 
-function mapStateToProps({ resultsPolls }) {
-  return { resultsPolls };
+function mapStateToProps(state) {
+
+  return { username: state.user.username };
 }
 
 export default reduxForm({

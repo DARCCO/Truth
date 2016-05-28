@@ -1,59 +1,47 @@
-
+const User = require('../models/user');
 const Poll = require('../models/poll');
 
 
 exports.createPoll = function(req, res, next) {
-  const photo = req.body.photo;
+  console.log('inside createPoll controller');
+  // const photo = req.body.photo;
   const question = req.body.question;
-  const answers = req.body.answers;
-
+  const username = req.body.username;
+  var answers = {};
+  if (req.body.answer1) {
+    answers[req.body.answer1] = 0;
+  }
+  if (req.body.answer2) {
+    answers[req.body.answer2] = 0;
+  }
+  if (req.body.answer3) {
+    answers[req.body.answer3] = 0;
+  }
+  if (req.body.answer4) {
+    answers[req.body.answer4] = 0;
+  }
+  console.log('question, answers', question, answers);
   // both fields must be filled out
-  if (!question || !answers) {
-  	res.status(422).send({ error: "You must provide a photo, question, and answers" });
+  if (!question || !req.body.answer1 || !req.body.answer2) {
+  	res.status(422).send({ error: "You must provide a question and answers" });
   }
 
-  // if poll already exists, can't make it
-  Poll.findOne( {question: question}, function(err, existingPoll) {
-    if (err) {
-      return next(err);
-    }
-
-    if (existingPoll) {
-      return res.status(422).send({ error: 'this poll has already been created' });
-    }
-
-    // if we get the right number of answers
-    if (Object.keys(answers).length >= 2) {
-      // create number of answers provided	
-      var tempAnswers = {};
-
-        for (var i = 0; i < Object.keys(answers).length; i++) {
-          tempAnswers[Object.keys(answers)[i]] = {
-          	a: answers[Object.keys(answers)[i]],
-          	count: 0
-          }
-        }
-
-    } 
-
-    if (Object.keys(answers).length < 2) {  
-      return res.status(422).send({ error: 'please enter at least two answers' });
-    }
-  
-    const poll = new Poll ({
-      photo: photo,
-      question: question,
-      answers: tempAnswers
-    })
-
-    poll.save(function(err){
-      if (err) { return next(err); }
-    });
-
-    // socket emitting
-    // io.sockets.emit('createpoll', { it: 'worked' });
-    res.json({ status: 'poll entered into database!' });
-
-
+  const poll = new Poll ({
+    photo: null,
+    createdBy: req.body.username,
+    question,
+    answers
   })
+
+  poll.save(function(err){
+    // User.findOne({ name: 'borne' }, function (err, doc) {
+    //   if (err) .
+    //   doc.name = 'jason borne';
+    //   doc.save(callback);
+    // })
+  // socket emitting
+  // io.sockets.emit('createpoll', { it: 'worked' });
+    if (err) { return next(err); }
+    res.json({ status: 'Poll entered into database!' });
+  });
 };

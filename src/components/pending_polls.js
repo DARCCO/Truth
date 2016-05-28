@@ -33,8 +33,8 @@ class PendingPolls extends Component {
     }
 
     return (
-      <Paper zDepth= {2} style= {style}>
-        <div key={pollId}>
+      <Paper key={pollId} zDepth= {2} style= {style}>
+        <div>
           <div className="col-md-12">
             <h3 className="text-center">{question}</h3>
           </div>
