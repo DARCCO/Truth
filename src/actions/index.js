@@ -31,11 +31,13 @@ export function signupUser({ username, password }) {
   return function(dispatch) {
     axios.post('/signup', { username, password })
       .then( response => {
+        console.log('inside .then of signupuser', response.data);
         dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/pendingpolls');
       })
       .catch((response) => {
+        console.log('inside .catch of signupuser', response);
         dispatch(authError(response.data.error));
       });
   }
@@ -133,7 +135,7 @@ export function deleteResultsPoll(pollId) {
 
 export function createPoll(props) {
   console.log('createpoll props inside action creator', props);
-  console.log('inside createpoll action creator');
+  console.log('props.dataURL', props.dataURL);
   return function(dispatch) {
     console.log('right before axios.post(createpoll)');
     axios.post('/createpoll', props, {
@@ -141,7 +143,9 @@ export function createPoll(props) {
     })
       .then(response => {
         console.log('props inside .then', props);
-        console.log('response.data in .then createPoll:', response.data);
+        console.log('respon232se.data in .then createPoll:', response.data);
+        console.log('sdkfsjdlfkds');
+        console.log('response.data.photo', response.data.photo);
         // dispatch({
         //   type: CREATE_POLL,
         //   payload: response

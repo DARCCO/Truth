@@ -25,8 +25,7 @@ mongoose.connect('mongodb://127.0.0.1:auth/truthdb');
 // bodyParser puts all requests into json
 app.use(morgan('combined'))
 app.use(cors());
-app.use(bodyParser.json({type: '*/*'}))
-
+app.use(bodyParser.json({type: '*/*'}));
 router(app, io);
 
 

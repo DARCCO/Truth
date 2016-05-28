@@ -5,8 +5,10 @@ import { createStore, applyMiddleware } from 'redux';
 import { Router, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
 import AUTH_USER from './actions/index';
+console.log('AUTH_USER under import', AUTH_USER);
 import ADD_CREATED_POLL from './actions/index';
-import * as actions from './actions/index';
+console.log('ADD_CREATED_POLL under import', ADD_CREATED_POLL);
+//import * as actions from './actions/index';
 // import io from 'socket.io';
 
 import reducers from './reducers';
@@ -22,7 +24,10 @@ const token = localStorage.getItem('token');
 
 //change to if (token)
 if (token) {
-  store.dispatch({ type: AUTH_USER });
+  console.log('auth user in if token', AUTH_USER);
+  //store.dispatch({ type: AUTH_USER });
+  //auth_user is not getting imported, fix later
+  store.dispatch({ type: 'AUTH_USER' });
 }
 
 // var socket = io();
