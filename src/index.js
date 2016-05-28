@@ -54,8 +54,9 @@ const muiTheme = getMuiTheme({
    //accent1Color: green500
   },
   appBar: {
-    height: 75,
+    height: 110,
   },
+  fontFamily: 'Open Sans Condensed'
 });
 
 ReactDOM.render(

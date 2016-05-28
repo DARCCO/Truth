@@ -8,11 +8,14 @@ import { addCreatedPoll } from '../actions/index';
 export default class App extends Component {
 
   render() {
+    const styles= {
+      fontSize: '70px'
+    };
 
     return (
       <div>
         <Link to="/" className="text-center">
-          <AppBar showMenuIconButton= {false} title='Truth'/>
+          <AppBar titleStyle= {styles} showMenuIconButton= {false} title='Truth'/>
         </Link>
         {this.props.children}
       </div>

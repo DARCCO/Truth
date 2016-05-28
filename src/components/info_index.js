@@ -3,6 +3,7 @@ import LoginHeader from './auth/login_header.js';
 import Header from './header.js';
 import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 class InfoIndex extends Component {
   renderHeader() {
@@ -23,9 +24,7 @@ class InfoIndex extends Component {
         {this.renderHeader()}
         <div>
           <Paper style={style} zDepth={4} >
-            <h2>What is Truth?</h2>
-            <p>It's love</p>
-            <p>It's life</p>
+           <img src="./truth.png" alt= "HTML5 Icon" />
           </Paper>
         </div>
       </div>
