@@ -39,20 +39,20 @@ module.exports = function(app, io) {
   // })
 
 
-  app.post('/createPoll', function(req, res) {
-    console.log('inside server /createPoll');
-    console.log('req.body', req.body);
-    io.sockets.emit('createpoll', {pollId: 'drew4' , poll: {
-    pollId: 'drew',
-    photo: null,
-    question: "Whats my age again?",
-    answers: {
-      "22": 0,
-      "23": 0,
-      "24": 0
-    }}});
-    res.send({});
-  })
+  // app.post('/createPoll', function(req, res) {
+  //   console.log('inside server /createPoll');
+  //   console.log('req.body', req.body);
+  //   io.sockets.emit('createpoll', {pollId: 'drew4' , poll: {
+  //   pollId: 'drew',
+  //   photo: null,
+  //   question: "Whats my age again?",
+  //   answers: {
+  //     "22": 0,
+  //     "23": 0,
+  //     "24": 0
+  //   }}});
+  //   res.send({});
+  // })
 
     // 'drew1': {
     // pollId: 'drew',
@@ -80,6 +80,7 @@ module.exports = function(app, io) {
   // app.post('/createpoll', function(req, res) {
   //   console.log('inside createpoll server route');
   //   console.log('req.body:', req.body);
+  //   res.send({ photo: req.body.dataURL });
   // })
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

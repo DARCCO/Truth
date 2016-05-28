@@ -10,29 +10,61 @@ import TextField from 'material-ui/TextField';
 class CreatePoll extends Component {
   constructor(props) {
     super(props);
-    this.state = { files: [] };
+    this.state = { file: [], dataURL: '' };
 
     this.onDrop = this.onDrop.bind(this);
     this.removePicture = this.removePicture.bind(this);
   }
 
   removePicture() {
-    this.setState({ files: [] });
+    this.setState({ file: [], dataURL: '' });
   }
 
-  onDrop(files) {
+  onDrop(file) {
     //make sure file is an image file in here
-    console.log('this', this);
-    this.setState({ files: files });
-    // this.props.fields.picture = files;
-    console.log('files:', files);
-    console.log('this.props',this.props);
-    console.log('state', this.state)
+    console.log('file', file);
+    var that = this;
+    if (file[0].type.match(/image.*/)) {
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        var dataURL = evt.target.result;
+        var image = new Image();
+        image.onload = function (imageEvent) {
+          var resizedImage;
+          // Resize the image
+          var canvas = document.createElement('canvas'),
+            max_size = 200,
+            width = image.width,
+            height = image.height;
+          if (width > height) {
+            if (width > max_size) {
+              height *= max_size / width;
+              width = max_size;
+            }
+          } else {
+            if (height > max_size) {
+              width *= max_size / height;
+              height = max_size;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+          resizedImage = canvas.toDataURL('image/jpeg');
+          that.setState({ file: file, dataURL: resizedImage });
+          console.log('this.stte.dataURL', this.state.dataURL);
+        }
+        image.src = dataURL;
+      };
+      reader.readAsDataURL(file[0]);
+    } else {
+      //change this to a div warning on screen
+      console.log('file not supported');
+    }
   }
 
   handleFormSubmit({ question, answer1, answer2, answer3, answer4 }) {
-    console.log('this.state.files before createpoll AC', this.state.files);
-    this.props.createPoll({ question, answer1, answer2, answer3, answer4, username: this.props.username, createdAt: new Date(), photo: this.state.files });
+    this.props.createPoll({ question, answer1, answer2, answer3, answer4, username: this.props.username, createdAt: new Date(), dataURL: this.state.dataURL });
     this.removePicture();
     this.props.resetForm();
   }
@@ -54,16 +86,16 @@ class CreatePoll extends Component {
       <Header value= {4}/>
       <Paper style= {style} zDepth= {4}>
         <div>
-            {this.state.files.length > 0 ?
+            {this.state.file.length > 0 ?
               <div>
                 <h2>Preview of picture:</h2>
-                <img src={this.state.files[0].preview} height="200" />
+                <img src={this.state.file[0].preview} height="200" />
                 <button onClick={this.removePicture}>Remove</button>
               </div>
             :
               <div className="col-md-offset-4 col-md-4" >
                 <Dropzone onDrop={this.onDrop} accept="image/*">
-                  <div>Try dropping some files here, or click to select files to upload.</div>
+                  <div>Try dropping an image here, or click to select image to upload.</div>
                 </Dropzone>
               </div>
             }
