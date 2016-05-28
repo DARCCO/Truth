@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deletePendingPoll } from '../actions/index';
-import { fetchPolls } from '../actions/index';
+import { deletePendingPoll, fetchPolls } from '../actions/index';
 import _ from 'lodash';
 import Header from './header.js';
 import Paper from 'material-ui/Paper';

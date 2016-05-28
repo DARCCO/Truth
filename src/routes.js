@@ -15,8 +15,8 @@ export default (
     <IndexRoute component={InfoIndex} />
     <Route path="login" component={Login} />
     <Route path="signup" component={Signup} />
-    <Route path="createpoll" component={CreatePoll} />
-    <Route path="pendingpolls" component={PendingPolls} />
-    <Route path="resultspolls" component={ResultsPolls} />
+    <Route path="createpoll" component={RequireAuth(CreatePoll)} />
+    <Route path="pendingpolls" component={RequireAuth(PendingPolls)} />
+    <Route path="resultspolls" component={RequireAuth(ResultsPolls)} />
   </Route>
 )
