@@ -129,29 +129,6 @@ export function deleteResultsPoll(pollId) {
         console.log('response.data in .catch deleteResultsPoll:', response.data);
       });
   }
-  // axios.delete('/resultspolls', pollId, {
-  //   headers: {authorization: localStorage.getItem('token') }
-  // })
-  // .then(function(res){
-  //   console.log(res);
-  // }).catch(function(err){
-  //   console.error(err);
-  // });
-
-<<<<<<< c7055e30717086bd4349608e2998aa2875635ee9
-  // return {
-  //   type: DELETE_RESULTS_POLL,
-  //   payload: pollId
-  // };
-=======
-  //axios.delete('/resultspolls', {resultsPoll: 'testing axios results poll'});
-
-  return {
-    type: DELETE_RESULTS_POLL,
-    payload: pollId
-  };
->>>>>>> [Add] Adds Sockets functionality to client-side
-
 }
 
 export function createPoll(props) {
@@ -174,26 +151,6 @@ export function createPoll(props) {
         console.log('response.data in .catch createPoll:', response.data);
       });
   }
-  //POST request must include JWT authorization in headers-- see other action creators for examples
-  //const request = null //axios request
-  // {
-  //   headers: {authorization: localStorage.getItem('token') }
-  // }
-<<<<<<< c7055e30717086bd4349608e2998aa2875635ee9
-  // const request = null;
-  // axios.post('/createPoll', {createPoll: 'testing axios post create poll'});
-  // return {
-  //   type: CREATE_POLL,
-  //   payload: request
-  // };
-=======
-  console.log('inside createpoll action creator');
-  const request = null;
-  axios.post('/createPoll', {createPoll: 'testing axios post create poll'});
-  return {
-    type: CREATE_POLL,
-    payload: request
-  };
 }
 
 export function addCreatedPoll(data) {
@@ -216,5 +173,4 @@ export function updatePendingPolls(data) {
     type: UPDATE_PENDING_POLLS,
     payload: data
   }
->>>>>>> [Add] Adds Sockets functionality to client-side
 }

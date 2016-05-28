@@ -1,6 +1,6 @@
-<<<<<<< be2ce2d47d53295eb281d09a3a2d10f5fcd08c17
-
 import {
+  AUTH_USER,
+  UNAUTH_USER,
   FETCH_POLLS,
   DELETE_PENDING_POLL,
   DELETE_RESULTS_POLL,
@@ -9,9 +9,6 @@ import {
   UPDATE_RESULTS_POLLS,
   UPDATE_PENDING_POLLS
 } from '../actions/index';
-=======
-import { FETCH_POLLS, DELETE_PENDING_POLL, DELETE_RESULTS_POLL, CREATE_POLL, AUTH_USER, UNAUTH_USER } from '../actions/index';
->>>>>>> [Add][Update] Updates poll and user schemas. Adds database queries and sends back user object. Updates create poll component to send image and other properties to action creator.
 
 const INITIAL_STATE = {
   pending: {
