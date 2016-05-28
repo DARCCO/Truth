@@ -36,27 +36,25 @@ class ResultsPolls extends Component {
     };
     console.log('this.props inside resultspolls', this.props);
     return (
-      <Paper zDepth= {2} style= {style}>
-      <div key={key}>
-        <div >
-          <h3 className="center">{question}</h3>
-          <RaisedButton label= 'Delete Poll' onClick= { () => this.props.deleteResultsPoll(pollId) } primary= {true}/>
+      <Paper key={key} zDepth={2} style={style}>
+        <div>
+          <h3 className="text-center">{question}</h3>
+          <RaisedButton label='Delete Poll' onClick={ () => this.props.deleteResultsPoll(pollId) } primary={true}/>
         </div>
-        <div >
-          <img src= {photo}/>
+        <div>
+          <img src={photo}/>
         </div>
         <div className="text-center">
           <PieChart
-          data= {data}
-          width= {width}
-          height= {height}
-          value= {value}
-          name= {name}
-          chartSeries= {chartSeries}
+          data={data}
+          width={width}
+          height={height}
+          value={value}
+          name={name}
+          chartSeries={chartSeries}
           />
         </div>
-      </div>
-        </Paper>
+      </Paper>
     );
   }
 

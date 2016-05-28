@@ -76,11 +76,11 @@ module.exports = function(app, io) {
 
   app.post('/signup', Authentication.signup);
 
-  //app.post('/createpoll', CreatePoll.createPoll);
-  app.post('/createpoll', function(req, res) {
-    console.log('inside createpoll server route');
-    console.log('req.body:', req.body);
-  })
+  app.post('/createpoll', CreatePoll.createPoll);
+  // app.post('/createpoll', function(req, res) {
+  //   console.log('inside createpoll server route');
+  //   console.log('req.body:', req.body);
+  // })
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

@@ -1,3 +1,4 @@
+<<<<<<< be2ce2d47d53295eb281d09a3a2d10f5fcd08c17
 
 import {
   FETCH_POLLS,
@@ -8,12 +9,15 @@ import {
   UPDATE_RESULTS_POLLS,
   UPDATE_PENDING_POLLS
 } from '../actions/index';
+=======
+import { FETCH_POLLS, DELETE_PENDING_POLL, DELETE_RESULTS_POLL, CREATE_POLL, AUTH_USER, UNAUTH_USER } from '../actions/index';
+>>>>>>> [Add][Update] Updates poll and user schemas. Adds database queries and sends back user object. Updates create poll component to send image and other properties to action creator.
 
 const INITIAL_STATE = {
   pending: {
     'drew1': {
-      pollId: 'drew54',
-      photo: null,
+      'pollId': 'drew54',
+      photo: {},
       question: "What should I name my dog?",
       answers: {
         "Blue": 0,
@@ -91,6 +95,12 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
 
   switch(action.type) {
+    case AUTH_USER:
+      const newState = action.payload || state;
+      console.log('newState in AUTH_USER case inside reducer_user:', newState);
+      return newState;
+    case UNAUTH_USER:
+      return state;
     case FETCH_POLLS:
       console.log('action.payload.data:', action.payload.data);
       // state = action.payload;
@@ -111,8 +121,6 @@ export default function(state = INITIAL_STATE, action) {
       var stateCopy = Object.assign({}, state);
       stateCopy.created = stateCreatedCopy;
       return stateCopy;
-<<<<<<< c7055e30717086bd4349608e2998aa2875635ee9
-=======
     case ADD_CREATED_POLL:
       console.log('Add Created Poll');
       if (state.user.username === action.payload.poll.createdBy){
@@ -146,8 +154,7 @@ export default function(state = INITIAL_STATE, action) {
         return stateCopy;
       }else{
         return state;
-      } 
->>>>>>> [Add] Adds Sockets functionality to client-side
+      }
     default:
       return state;
   }

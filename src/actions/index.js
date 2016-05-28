@@ -17,7 +17,7 @@ export function loginUser({ username, password }) {
     axios.post('/signin', { username, password })
       .then( response => {
         //need to add payload to AUTH_USER dispatch that contains user object
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/pendingpolls');
       })
@@ -28,12 +28,10 @@ export function loginUser({ username, password }) {
 }
 
 export function signupUser({ username, password }) {
-  console.log('inside singupUser with user/pass', username, password);
   return function(dispatch) {
     axios.post('/signup', { username, password })
       .then( response => {
-        //need to add payload to AUTH_USER dispatch that contains user object
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/pendingpolls');
       })
@@ -157,12 +155,15 @@ export function deleteResultsPoll(pollId) {
 }
 
 export function createPoll(props) {
+  console.log('createpoll props inside action creator', props);
   console.log('inside createpoll action creator');
   return function(dispatch) {
+    console.log('right before axios.post(createpoll)');
     axios.post('/createpoll', props, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
+        console.log('props inside .then', props);
         console.log('response.data in .then createPoll:', response.data);
         // dispatch({
         //   type: CREATE_POLL,
