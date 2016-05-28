@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
-import AUTH_USER from './actions/index';
+import { AUTH_USER } from './actions/index';
 
 import reducers from './reducers';
 import routes from './routes';
@@ -34,8 +34,8 @@ const muiTheme = getMuiTheme({
 });
 
 ReactDOM.render(
-  <Provider store={store}>
   <MuiThemeProvider muiTheme={muiTheme}>
+  <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
   </Provider>
   </MuiThemeProvider>

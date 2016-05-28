@@ -7,7 +7,7 @@ socket.on('news', function (data) {
   console.log(data);
   socket.emit('my other event', { my: 'data' });
 });
-socket.on('createpoll', function(data) {
+socket.on('createdpoll', function(data) {
   console.log('data createpoll socket.on:', data);
 });
 

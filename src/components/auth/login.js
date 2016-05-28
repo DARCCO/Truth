@@ -11,7 +11,6 @@ import Paper from 'material-ui/Paper';
 class Login extends Component {
   handleFormSubmit({username, password}) {
     this.props.loginUser({ username, password });
-    console.log(username, password);
   }
   renderErrorAlert(){
     if (this.props.errorMessage){
@@ -19,9 +18,10 @@ class Login extends Component {
         <div className='alert alert-danger'>
           <strong>{this.props.errorMessage}</strong>
         </div>
-        );
+      );
     }
   }
+
   render() {
     const { handleSubmit, fields: { username, password } }= this.props;
     const style = {
@@ -29,21 +29,21 @@ class Login extends Component {
     };
     return (
       <div>
-        <LoginHeader value ={0} />
-        <Paper style= {style} zDepth= {4}>
-        <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset className= 'form-group'>
-          <TextField halfWidth hintText= 'Username' { ...username }/>
-        </fieldset>
-        <fieldset className= 'form-group'>
-          <TextField halfWidth hintText= 'Password' { ...password }/>
-        </fieldset>
-        {this.renderErrorAlert()}
-        <RaisedButton type='submit' label= 'Login' primary= {true}/>      
-        <Link to= '/signup'>
-         <FlatButton label='Sign up' secondary= {true} />
-        </Link>
-        </form>
+        <LoginHeader value={0} />
+        <Paper style={style} zDepth={4}>
+          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            <fieldset className='form-group'>
+              <TextField halfWidth hintText='Username' { ...username } />
+             </fieldset>
+            <fieldset className='form-group'>
+              <TextField halfWidth hintText='Password' { ...password } />
+            </fieldset>
+            {this.renderErrorAlert()}
+            <RaisedButton type='submit' label='Login' primary={true} />
+            <Link to='/signup'>
+              <FlatButton label='Sign up' secondary={true} />
+            </Link>
+          </form>
         </Paper>
       </div>
     );
@@ -51,7 +51,7 @@ class Login extends Component {
 };
 
 function mapStateToProps(state){
-  return {errorMessage: state.auth.loginError};
+  return { errorMessage: state.auth.error };
 }
 
 export default reduxForm ({
