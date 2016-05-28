@@ -20,6 +20,12 @@ class CreatePoll extends Component {
     this.setState({ files: [] });
   }
 
+  handleFormSubmit(){
+    this.props.createPoll();
+    //this.removePicture();
+    this.props.resetForm();
+  }
+
   onDrop(files) {
     //make sure file is an image file in here
     console.log('this', this);
@@ -54,7 +60,7 @@ class CreatePoll extends Component {
               </div>
             }
         </div>
-        <form onSubmit={handleSubmit(this.props.createPoll)}>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
           <div className="form-group">
           <TextField fullWidth hintText= 'Question' { ...question }/>

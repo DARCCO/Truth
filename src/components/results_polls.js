@@ -28,8 +28,9 @@ class ResultsPolls extends Component {
     var width = 700;
     var height = 400;
     var chartSeries = [];
+    var colors= ['#64FFDA', '#C6FF00', '#448AFF', '#B388FF'];
 
-    data.forEach((d) => chartSeries.push({field: d.answer, name: d.answer}));
+    data.forEach((d, index) => chartSeries.push({field: d.answer, name: d.answer, color: colors[index]}));
     const style = {
       height: 500
     };
@@ -38,13 +39,13 @@ class ResultsPolls extends Component {
       <Paper zDepth= {2} style= {style}>
       <div key={key}>
         <div >
-          <h3 className="text-center">{question}</h3>
+          <h3 className="center">{question}</h3>
           <RaisedButton label= 'Delete Poll' onClick= { () => this.props.deleteResultsPoll(pollId) } primary= {true}/>
         </div>
         <div >
           <img src= {photo}/>
         </div>
-        <div >
+        <div className="text-center">
           <PieChart
           data= {data}
           width= {width}
