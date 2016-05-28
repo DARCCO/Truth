@@ -35,7 +35,7 @@ class Signup extends Component {
       <div>
         <LoginHeader value={1} />
         <Paper style= {style} zDepth= {4}>
-        <div className= 'centered-Prompt'>
+        <div className= 'centered-Create'>
         <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className= 'form-group' >
             <TextField halfWidth hintText= 'Username' { ...username }/>
