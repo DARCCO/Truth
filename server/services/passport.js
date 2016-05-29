@@ -11,7 +11,7 @@ const localLogin = new LocalStrategy(function(username, password, done) {
   // Verify this username and password, call done with the user
   // if it is the correct username and password
   // otherwise, call done with false
-  User.findOne({ username }, function(err, user) {
+  User.findOne({ username: username.toLowerCase() }, function(err, user) {
     if (err) { return done(err); }
     if (!user) { return done(null, false); }
 

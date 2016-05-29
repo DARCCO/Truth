@@ -16,8 +16,7 @@ export function loginUser({ username, password }) {
   return function(dispatch) {
     axios.post('/signin', { username, password })
       .then( response => {
-        //need to add payload to AUTH_USER dispatch that contains user object
-        dispatch({ type: AUTH_USER, });
+        dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/pendingpolls');
       })
@@ -31,7 +30,6 @@ export function signupUser({ username, password }) {
   return function(dispatch) {
     axios.post('/signup', { username, password })
       .then( response => {
-        console.log('inside .then of signupuser', response.data);
         dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/pendingpolls');
@@ -142,14 +140,11 @@ export function createPoll(props) {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
-        console.log('props inside .then', props);
-        console.log('respon232se.data in .then createPoll:', response.data);
-        console.log('sdkfsjdlfkds');
-        console.log('response.data.photo', response.data.photo);
-        // dispatch({
-        //   type: CREATE_POLL,
-        //   payload: response
-        // });
+        console.log('response.data in .then createPoll:', response.data);
+        dispatch({
+          type: CREATE_POLL,
+          payload: response.data
+        });
       })
       .catch(response => {
         console.log('response.data in .catch createPoll:', response.data);

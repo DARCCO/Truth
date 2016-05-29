@@ -14,16 +14,71 @@ function tokenForUser(user) {
 
 exports.signin = function(req, res, next) {
   // User has already had their email and password auth'd
-  // We just need to give them a token
-  res.send({ token: tokenForUser(req.user) });
+
+  // user is logged in, need to send them their user object with all correct information:
+  // receive username through req.body.username
+  // use username to get all other information in user collection
+  // use user.pending and user.collection id's to get the polls needed from the polls collection
+  // send them a user object with all their user info and created/pending polls inside properties
+  const username = req.body.username;
+
+  User.findOne({ username: username.toLowerCase() }, function(err, existingUser) {
+    if (err) { return next(err); }
+    const photo = existingUser.photo || null, //photo is optional, so either set to photo or null
+      city = existingUser.city || null, // remove null when city is required to sign up
+      country = existingUser.country || null, //remove null when country is required to sign up
+      gender = existingUser.gender || null, //remove null when gender is required to sign up
+      friends = existingUser.friends,
+      pending = existingUser.pending,
+      created = existingUser.created,
+      lastCreatedPollAt = existingUser.lastCreatedPollAt || null;
+      //get all polls
+      Poll.find({}, function(err, polls) {
+          // create a pending object with all polls that have a matching ID in pending
+        const pendingObject = {};
+          // create a created object with all polls that have a matching ID in created
+        const createdObject = {};
+        polls.forEach(function(poll) {
+          // if poll id exists in pending/created, then add it to object
+          if (pending[poll.id]) pendingObject[poll.id] = poll;
+          if (created[poll.id]) createdObject[poll.id] = poll;
+        });
+        res.json({
+          user: {
+            username,
+            photo,
+            city,
+            country,
+            gender,
+            friends,
+            pending: pendingObject,
+            created: createdObject,
+            lastCreatedPollAt
+          },
+          token: tokenForUser(req.user) });
+      });
+  });
+
+  // user: {
+  //   username,
+  //   photo:,
+  //   city:,
+  //   country:,
+  //   gender:,
+  //   friends:,
+  //   pending:,
+  //   created:,
+  //   lastCreatedPollAt:
+  // }
 }
 
 exports.signup = function(req, res, next) {
-  const username = req.body.username;
-  const password = req.body.password;
-  console.log('inside signup in .controllers/authentication pw,user is:', username, password);
-  // const photo = req.body.photo;
-  //console.log(photo)
+  const username = req.body.username,
+    password = req.body.password,
+    photo = req.body.photo,
+    city = req.body.city,
+    country = req.body.country,
+    gender = req.body.gender;
 
   if ( !username || !password ) {
   	return res.status(422).send({ error: 'You must provide username and password' })
@@ -31,7 +86,7 @@ exports.signup = function(req, res, next) {
 
   // see if a user with a given username exists
 
-  User.findOne({ username: username }, function(err, existingUser) {
+  User.findOne({ username }, function(err, existingUser) {
     if (err) { return next(err); }
   	// if a username does exist
   	if (existingUser) {
@@ -44,14 +99,17 @@ exports.signup = function(req, res, next) {
   	// create and save our record
     // with all current pending ids
     const user = new User ({
-        username: username,
-        password: password,
-        // photo: photo,
+        username,
+        password,
+        photo,
+        city,
+        country,
+        gender,
+        friends: {},
         pending: {},
-        created: {}
+        created: {},
+        lastCreatedPollAt: null
     });
-
-    console.log('this is user:', user);
 
     // respond to request indicating user was created
     user.save(function(err){
@@ -64,40 +122,32 @@ exports.signup = function(req, res, next) {
           arrayOfObjectIDs.push( mongoose.Types.ObjectId(curr.id) );
           return accu;
         }, {});
-
-        User.findOneAndUpdate({ username: username }, { pending: objectOfPendingIDs }, { new: true }, function(err, user) {
+        User.findOneAndUpdate({ username: username.toLowerCase() }, { pending: objectOfPendingIDs, created: {}, friends: {} }, { new: true }, function(err, user) {
           if (err) { return next(err); }
-          console.log('user inside findoneandupdate callback', user);
         });
-        console.log('arrayOfObjectIDs', arrayOfObjectIDs);
         Poll.find({
           "_id" : { $in: arrayOfObjectIDs }
         }, function(err, docs) {
-          console.log('this should be all the polls', docs);
           const pending = docs.reduce(function(accu, curr) {
             accu[curr.id] = curr;
             return accu;
           }, {});
-          console.log('pending', pending);
           res.json({
             user: {
-              username: username,
-              pending: pending,
-              created: {}
+              username,
+              photo,
+              city,
+              country,
+              gender,
+              friends: {},
+              pending,
+              created: {},
+              lastCreatedPollAt: null
             },
             token: tokenForUser(user)
           });
         });
-        // res.send(polls.reduce(function(pollMap, item) {
-        //   pollMap[item.id] = item;
-        //   return pollMap;
-        // }, {}));
       });
-
-      // res.json({
-      //   //user: user,
-      //   token: tokenForUser(user)
-      // });
     });
   });
 }

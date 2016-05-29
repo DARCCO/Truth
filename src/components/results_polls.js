@@ -15,13 +15,14 @@ class ResultsPolls extends Component {
     this.renderResultsPolls = this.renderResultsPolls.bind(this);
   }
 
-  renderResultsPolls(pollsData, key) {
+  renderResultsPolls(pollsData, property) {
+    console.log('property', property);
     var photo = pollsData.photo;
     var question = pollsData.question;
-    var pollId = key;
+    var pollId = property;
     var data = [];
-    for (key in pollsData.answers) {
-      data.push({'answer': key, value: pollsData.answers[key]});
+    for (var keys in pollsData.answers) {
+      data.push({'answer': keys, value: pollsData.answers[keys]});
     }
     var value = (d) => d.value;
     var name = (d) => d.answer;
@@ -36,7 +37,7 @@ class ResultsPolls extends Component {
     };
     console.log('this.props inside resultspolls', this.props);
     return (
-      <Paper key={key} zDepth={2} style={style}>
+      <Paper key={pollId} zDepth={2} style={style}>
         <div>
           <h3 className="text-center">{question}</h3>
           <RaisedButton label='Delete Poll' onClick={ () => this.props.deleteResultsPoll(pollId) } primary={true}/>
@@ -62,9 +63,7 @@ class ResultsPolls extends Component {
     return (
       <div>
         <Header value= {3}/>
-        <div>
           {_.map(this.props.resultsPolls, this.renderResultsPolls)}
-        </div>
       </div>
     );
   }
