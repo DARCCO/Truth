@@ -34,25 +34,25 @@ class PendingPolls extends Component {
 
     return (
       <Paper key={pollId} zDepth= {2} style= {style}>
-        <div>
+        <div >
           <div className="col-md-12">
+            <div className="col-md-2" >
+              <img src= 'http://articlebio.com/uploads/bio/2016/01/31/stone-cold-steve-austin.jpg' className= 'image' height= '150' width='150' />
+            </div>
             <h3 className="text-center">{question}</h3>
+            <div >
+              <div className="col-md-10 center" >
+                { _.map(answers, (answer, key) => {
+                  return (
+                    <div key={key} className="col-md-5" >
+                      <RaisedButton style= {styleButton} label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll(pollId) }/>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-          <div className= 'centered-Pending'>
-          <div className="col-md-2">
-            <img src= {photo}/>
-          </div>
-          <div className="col-md-10 center" >
-            { _.map(answers, (answer, key) => {
-              return (
-                <div key={key} className="col-md-5" >
-                  <RaisedButton style= {styleButton} label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll(pollId) }/>
-                </div>
-              );
-            })}
-          </div>
-          </div>
-          </div>
+        </div>
       </Paper>
     );
   }

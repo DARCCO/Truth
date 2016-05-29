@@ -11,6 +11,7 @@ import { cyan100, lightBlue50, teal50 } from 'material-ui/styles/colors';
 
 class Login extends Component {
   handleFormSubmit({username, password}) {
+
     this.props.loginUser({ username, password });
   }
   renderErrorAlert(){
@@ -33,7 +34,7 @@ class Login extends Component {
       <div>
         <LoginHeader value ={0} />
         <Paper style= {style} zDepth= {4}>
-        <div className= 'centered-Create'>
+        <div className= 'centered-Login'>
         <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
         <fieldset className= 'form-group'>
           <TextField halfWidth hintText= 'Username' { ...username }/>
