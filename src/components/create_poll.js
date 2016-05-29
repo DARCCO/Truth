@@ -34,7 +34,7 @@ class CreatePoll extends Component {
           var resizedImage;
           // Resize the image
           var canvas = document.createElement('canvas'),
-            max_size = 200,
+            max_size = 150,
             width = image.width,
             height = image.height;
           if (width > height) {
@@ -50,10 +50,9 @@ class CreatePoll extends Component {
           }
           canvas.width = width;
           canvas.height = height;
-          canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+          var context = canvas.getContext('2d').drawImage(image, 0, 0, width, height);
           resizedImage = canvas.toDataURL('image/jpeg');
           that.setState({ file: file, dataURL: resizedImage });
-          console.log('this.stte.dataURL', this.state.dataURL);
         }
         image.src = dataURL;
       };
