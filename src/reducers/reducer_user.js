@@ -93,19 +93,26 @@ export default function(state = INITIAL_STATE, action) {
 
   switch(action.type) {
     case AUTH_USER:
-      const newState = action.payload || state;
+      var newState = action.payload || state;
       console.log('newState in AUTH_USER case inside reducer_user:', newState);
       return newState;
     case UNAUTH_USER:
-      return state;
+      var newState = {};
+      return newState;
     case FETCH_POLLS:
       console.log('action.payload.data:', action.payload.data);
       // state = action.payload;
       // return state;
       return action.payload;
     case CREATE_POLL:
-      console.log('inside create POLL:', action.payload);
-      return state;
+      var stateCopy = Object.assign({}, state);
+      var stateCreatedCopy = Object.assign({}, state.created);
+      console.log('action.payload.poll', action.payload.poll);
+      console.log('action.payload.poll[_id]', action.payload.poll["_id"]);
+      stateCreatedCopy[action.payload.poll["_id"]] = action.payload.poll;
+      stateCopy.created = stateCreatedCopy;
+      console.log('stateCopy:', stateCopy);
+      return stateCopy;
     case DELETE_PENDING_POLL:
       const statePendingCopy = Object.assign({}, state.pending);
       delete statePendingCopy[action.payload];

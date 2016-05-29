@@ -8,13 +8,14 @@ const userSchema = new Schema({
   // and to make tolowercase
   username: { type: String, unique: true, lowercase: true },
   password: String,
-  // photo: { data: Buffer, contentType: String },
-  // city: String,
-  // country: String,
-  // friends: [String],
+  photo: String,
+  city: String,
+  country: String,
+  gender: String,
+  friends: {},
   pending: {},
-  created: {}
-
+  created: {},
+  lastCreatedPollAt: Date
 });
 
 // On save Hook, encrypt password
