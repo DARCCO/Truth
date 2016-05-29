@@ -5,6 +5,7 @@ import { createPoll } from '../actions/index';
 import Header from './header';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
 class CreatePoll extends Component {
@@ -80,25 +81,51 @@ class CreatePoll extends Component {
       //height: '40px'
     }
 
+    const styleDropzone= {
+      width: 200,
+      height: 200,
+      borderWith: 2,
+      borderColor: '#666',
+      borderStyle: 'dashed',
+      borderRadius: 5,
+      margin: 'auto'
+    }
+
+    const activeStyleDropzone= {
+      width: 200,
+      height: 200,
+      borderWith: 2,
+      borderColor: '#666',
+      borderStyle: 'dashed',
+      borderRadius: 5,
+      margin: 'auto'
+    }
+
+    const styleCancel= {
+      margin: 'auto'
+    }
 
     return (
       <div>
       <Header value= {4}/>
       <Paper style= {style} zDepth= {4}>
-        <div>
-            {this.state.file.length > 0 ?
+        <div className= 'modal-body'>
+          {this.state.file.length > 0 ?
+            <div className= 'centered-Create'>
+              <img src={this.state.file[0].preview} height="200" />
+            </div>
+          :
+            <div>
               <div>
-                <h2>Preview of picture:</h2>
-                <img src={this.state.file[0].preview} height="200" />
-                <button onClick={this.removePicture}>Remove</button>
+              <Dropzone style= { styleDropzone } onDrop={this.onDrop} accept="image/*">
+                <div>Try dropping an image here, or click to select image to upload.</div>
+              </Dropzone>
               </div>
-            :
-              <div className="col-md-offset-4 col-md-4" >
-                <Dropzone onDrop={this.onDrop} accept="image/*">
-                  <div>Try dropping an image here, or click to select image to upload.</div>
-                </Dropzone>
-              </div>
-            }
+            </div>
+          }
+        </div>
+        <div className= 'centered-Create'>
+          <FlatButton label= 'Cancel' secondary= {true} onClick={ this.removePicture }/>
         </div>
         <div className= 'centered-Create'>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
@@ -147,6 +174,26 @@ function validate(values) {
 
   if (!values.answer2) {
     errors.answer2 = 'Required: Enter a possible answer';
+  }
+
+  if (values.question && values.question.indexOf('.') !== -1) {
+    errors.question= 'Questions must not contain periods';
+  }
+  
+  if (values.answer1 && values.answer1.indexOf('.') !== -1) {
+    errors.answer1= 'Answers must not contain periods';
+  }
+
+  if (values.answer2 && values.answer2.indexOf('.') !== -1) {
+    errors.answer2= 'Answers must not contain periods';
+  }
+
+  if (values.answer3 && values.answer3.indexOf('.') !== -1) {
+    errors.answer3= 'Answers must not contain periods';
+  }
+
+  if (values.answer4 && values.answer4.indexOf('.') !== -1) {
+    errors.answer4= 'Answers must not contain periods';
   }
 
   return errors;

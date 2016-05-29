@@ -35,7 +35,7 @@ class Signup extends Component {
       <div>
         <LoginHeader value={1} />
         <Paper style= {style} zDepth= {4}>
-        <div className= 'centered-Create'>
+        <div className= 'centered-Login'>
         <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className= 'form-group' >
             <TextField halfWidth hintText= 'Username' { ...username }/>
@@ -79,6 +79,14 @@ function validate(formProps) {
 
   if(formProps.password !== formProps.passwordConfirm) {
     errors.passwordConfirm = 'Passwords must match';
+  }
+
+  if(formProps.username && formProps.username.indexOf('.') !== -1) {
+    errors.username= 'Username must not contain periods';
+  }
+
+  if(formProps.password && formProps.password.indexOf('.') !== -1) {
+    errors.password= 'Password must not contain periods';
   }
 
   return errors;
