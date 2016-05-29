@@ -63,16 +63,9 @@ module.exports = function(app, io) {
     //   "23": 0,
     //   "24": 0
     // }
-  app.post('/pendingpolls', function(req, res) {
+  app.post('/pendingpolls', CreatePoll.answerPending);
 
-    io.sockets.emit('pendingpoll', { pollId: pollId, poll: {} });
-    res.send({});
-  })
-
-  app.delete('/resultspolls', function(req, res) {
-    io.sockets.emit('resultspoll', { pollId: pollId, poll: {} });
-    res.send({});
-  })
+  app.post('/resultspolls', CreatePoll.removeResults);
 
   app.post('/signup', Authentication.signup);
 

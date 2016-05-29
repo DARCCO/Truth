@@ -82,17 +82,16 @@ export function fetchPolls() {
   // };
 }
 
-export function deletePendingPoll(pollId) {
+export function deletePendingPoll(info) {
   return function(dispatch) {
-    axios.post('/pendingpolls', pollId, {
+    axios.post('/pendingpolls', info, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
-        console.log('response.data in .then deletePendingPoll:', response.data);
-        // dispatch({
-        //   type: DELETE_PENDING_POLL,
-        //   payload: response
-        // });
+        dispatch({
+          type: DELETE_PENDING_POLL,
+          payload: response.data
+        });
       })
       .catch(response => {
         console.log('response.data in .catch deletePendingPoll:', response.data);
@@ -114,16 +113,17 @@ export function deletePendingPoll(pollId) {
 }
 
 export function deleteResultsPoll(pollId) {
+  console.log('pollId:', pollId);
+  console.log('inside deleteResultspoll action creator');
   return function(dispatch) {
-    axios.post('/resultspolls', pollId, {
+    axios.post('/resultspolls', { pollId }, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
-        console.log('response.data in .then deleteResultsPoll:', response.data);
-        // dispatch({
-        //   type: DELETE_RESULTS_POLL,
-        //   payload: response
-        // });
+        dispatch({
+          type: DELETE_RESULTS_POLL,
+          payload: response.data
+        });
       })
       .catch(response => {
         console.log('response.data in .catch deleteResultsPoll:', response.data);
