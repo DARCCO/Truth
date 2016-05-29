@@ -1,0 +1,5 @@
+/node_modules
+bundle.js
+npm-debug.log
+/server/config.js
+.DS_STORE

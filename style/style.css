@@ -1,0 +1,84 @@
+.error {
+  color: red;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.center {
+  align-content: center;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.auto-margin {
+  margin: auto;
+}
+
+.container {
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.centered-Pending {
+	
+	padding: 70px;
+}
+
+.centered-Create {
+
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-Login {
+  padding: 150px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.col-md-2 img {
+  vertical-align: middle;
+}
+.image {
+  vertical-align: middle;
+}
+
+.dropzone {
+  align-items: center;
+}
+
+.centered-Prompt {
+    display: flex;
+
+
+  align-items: center;
+
+
+  justify-content: center;
+
+  min-height: 300px;
+}
+
+.wrapper {
+    width: 940px;
+    margin: 0 auto;
+    position: relative; /* Ensure absolute positioned child elements are relative to this */
+}
+
+/* Absolute positioned wrapper for the element you want to fix position */
+.fixed-wrapper {
+    width: 220px;
+    position: absolute;
+    top: 0;
+    left: -240px; /* Move this out to the left of the site body, leaving a 20px gutter */
+}
+
+/* The element you want to fix the position of */
+.fixed {
+    width: 220px;
+    position: fixed;
+    /* Do not set top / left! */
+}
