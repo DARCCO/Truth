@@ -42,6 +42,7 @@
 .col-md-2 img {
   vertical-align: middle;
 }
+
 .image {
   vertical-align: middle;
 }
@@ -81,4 +82,25 @@
     width: 220px;
     position: fixed;
     /* Do not set top / left! */
+}
+
+.centeredIcon {
+  /**
+   * Lay out the children of this container with
+   * flexbox.
+   */
+  display: flex;
+
+  /**
+   * As in the above "Centered prmopt" example,
+   * we'll rotate the main axis so that the children
+   * are ordered vertically.
+   */
+  flex-direction: column;
+
+  /**
+   * And just like in that example, align the children
+   * in the center, along the main axis.
+   */
+  align-items: center;
 }

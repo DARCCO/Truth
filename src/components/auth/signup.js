@@ -15,7 +15,7 @@ class Signup extends Component {
   }
 
   renderAlert(){
-    if (this.props.errorMessage) {
+    if (this.props.errorMessage && this.props.errorMessage !== 'Incorrect Login Information') {
       return (
         <div className= 'alert alert-danger'>
           <strong>{this.props.errorMessage}</strong>
