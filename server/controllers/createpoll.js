@@ -45,7 +45,7 @@ exports.removeResults = function(req, res, next) {
         }
       });
     });
-    Poll.remove({ id: poll.id }, function (err) {
+    Poll.remove({ "_id": poll.id }, function (err) {
       if (err) return handleError(err);
     });
     next();
