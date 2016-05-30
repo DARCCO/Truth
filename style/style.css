@@ -120,20 +120,25 @@ img {
 
 .row {
   height: 75%;
-  display:flex;
-  justify-content: center;
-  align-items: center;
+}
+.table-row {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.table-row [class^="col-"] {
+  display: table-cell;
+  float: none;
+  vertical-align: middle;
+
 }
 
 .jumbotron{
-    width: 80vh;
-    /*justify-content: right;
-    align-items: right;*/
+  background-color: #9C27B0 !important;
 }
 
-.legend {
-  text-align: right;
-}
+
 
 
 
