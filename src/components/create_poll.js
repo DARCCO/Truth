@@ -34,7 +34,7 @@ class CreatePoll extends Component {
           var resizedImage;
           // Resize the image
           var canvas = document.createElement('canvas'),
-            max_size = 150,
+            max_size = 300,
             width = image.width,
             height = image.height;
           if (width > height) {
@@ -111,7 +111,7 @@ class CreatePoll extends Component {
         <div className= 'modal-body'>
           {this.state.file.length > 0 ?
             <div className= 'centered-Create'>
-              <img src={this.state.file[0].preview} height="200" />
+              <img src={this.state.file[0].preview} />
             </div>
           :
             <div>
