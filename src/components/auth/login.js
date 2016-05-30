@@ -15,7 +15,7 @@ class Login extends Component {
     this.props.loginUser({ username, password });
   }
   renderErrorAlert(){
-    if (this.props.errorMessage){
+    if (this.props.errorMessage && this.props.errorMessage !== 'Username is in use'){
       return (
         <div className='alert alert-danger'>
           <strong>{this.props.errorMessage}</strong>

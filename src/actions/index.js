@@ -32,6 +32,7 @@ export function signupUser({ username, password }) {
       .then( response => {
         dispatch({ type: AUTH_USER, payload: response.data.user });
         localStorage.setItem('token', response.data.token);
+        console.log('inside signupUser');
         browserHistory.push('/pendingpolls');
       })
       .catch((response) => {
