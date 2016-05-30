@@ -17,6 +17,10 @@ module.exports = function(app, io) {
     res.sendFile(path.resolve(__dirname + '/../bundle.js'));
   });
 
+  app.get('/TRUTHLOGO.png', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../TRUTHLOGO.png'));
+  })
+
   app.get('/style/style.css', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../style/style.css'));
   });

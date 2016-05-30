@@ -16,6 +16,15 @@
   text-align: center;
 }
 
+.center-Splash {
+  align-content: center;
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
+
+}
+
 .auto-margin {
   margin: auto;
 }
@@ -108,10 +117,14 @@
 }
 
 img {
-   background: #3A6F9A ;
    vertical-align: middle;
-   max-height: 150px;
+/*   max-height: 150px;
    max-width: 150px;
+*/}
+
+.dropzoneIMG {
+  max-height: 500px;
+  max-width: 500px;
 }
 
 .question {
