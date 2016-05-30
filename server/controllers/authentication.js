@@ -86,7 +86,7 @@ exports.signup = function(req, res, next) {
 
   // see if a user with a given username exists
 
-  User.findOne({ username }, function(err, existingUser) {
+  User.findOne({ username: username.toLowerCase() }, function(err, existingUser) {
     if (err) { return next(err); }
   	// if a username does exist
   	if (existingUser) {
