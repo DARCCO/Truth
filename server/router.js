@@ -10,7 +10,7 @@ const requireSignin = passport.authenticate('local', { session: false });
 module.exports = function(app, io) {
 
   app.get('/', function(req, res) {
-  	res.sendFile(path.resolve(__dirname + '/../index.html'));
+    res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
 
   app.get('/bundle.js', function(req, res) {
@@ -53,4 +53,3 @@ module.exports = function(app, io) {
   });
 
 }
-

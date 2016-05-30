@@ -68,7 +68,7 @@ exports.createPoll = function(req, res, next) {
   }
   // both fields must be filled out
   if (!req.body.question || !req.body.answer1 || !req.body.answer2) {
-  	res.status(422).send({ error: "You must provide a question and answers" });
+    res.status(422).send({ error: "You must provide a question and answers" });
   }
 
   // TO DO: check if createdBy username's lastCreatedPollAt is within 5 minutes of createdAt
