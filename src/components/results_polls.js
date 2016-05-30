@@ -15,9 +15,6 @@ class ResultsPolls extends Component {
     this.renderResultsPolls = this.renderResultsPolls.bind(this);
   }
 
-    //array of objects
-
-
   renderResultsPolls(pollsData, property) {
     console.log('property', property);
     var photo = pollsData.photo;
@@ -29,12 +26,11 @@ class ResultsPolls extends Component {
     }
     var value = (d) => d.value;
     var name = (d) => d.answer;
-    var width = 500;
+    var width = 700;
     var height = 400;
     var chartSeries = [];
     var colors= ['#64FFDA', '#C6FF00', '#448AFF', '#B388FF'];
 
-    const dataCheck = data.filter((curr) => curr.value === 0 );
     data.forEach((d, index) => chartSeries.push({field: d.answer, name: d.answer, color: colors[index]}));
     const style = {
       height: 500
@@ -46,30 +42,18 @@ class ResultsPolls extends Component {
           <h3 className="text-center">{question}</h3>
           <RaisedButton label='Delete Poll' onClick={ () => this.props.deleteResultsPoll(pollId) } primary={true}/>
         </div>
-
-        <div className="row">
-          <div className="col-sm-4 col-md-4 col-lg-4 text-right" >
-            <span>
-              <img src={photo} />
-            </span>
-          </div>
-          <div className="col-sm-8 col-md-8 col-lg-8 text-center" >
-            {dataCheck.length === data.length ?
-                <div className="jumbotron">
-                  <h1>Waiting on Responses</h1>      
-                  <p>You will know the truth soon enough.</p>
-                </div>
-              :
-                <PieChart 
-                data={data}
-                width={width}
-                height={height}
-                value={value}
-                name={name}
-                chartSeries={chartSeries}
-                />
-            }
-          </div>
+        <div>
+          <img src={photo}/>
+        </div>
+        <div className="text-center">
+          <PieChart
+          data={data}
+          width={width}
+          height={height}
+          value={value}
+          name={name}
+          chartSeries={chartSeries}
+          />
         </div>
       </Paper>
     );
