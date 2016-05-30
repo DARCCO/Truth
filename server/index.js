@@ -23,7 +23,7 @@ mongoose.connect('mongodb://127.0.0.1:auth/truthdb');
 
 // morgan logs so we can debug
 // bodyParser puts all requests into json
-app.use(morgan('combined'))
+app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json({type: '*/*'}));
 router(app, io);

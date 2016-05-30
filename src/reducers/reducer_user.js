@@ -20,11 +20,6 @@ export default function(state = {}, action) {
     case UNAUTH_USER:
       var newState = {};
       return newState;
-    case FETCH_POLLS:
-      console.log('action.payload.data:', action.payload.data);
-      // state = action.payload;
-      // return state;
-      return action.payload;
     case CREATE_POLL:
       var stateCopy = Object.assign({}, state);
       var stateCreatedCopy = Object.assign({}, state.created);

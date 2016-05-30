@@ -120,6 +120,7 @@ export function deleteResultsPoll(pollId) {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
+        console.log('resp.data in .then', response.data);
         dispatch({
           type: DELETE_RESULTS_POLL,
           payload: response.data

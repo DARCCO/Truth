@@ -6,8 +6,8 @@ import { Router, browserHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
 import { AUTH_USER } from './actions/index';
 import { ADD_CREATED_POLL } from './actions/index';
-//import * as actions from './actions/index';
-// import io from 'socket.io';
+import * as actions from './actions/index';
+import io from 'socket.io-client';
 
 import reducers from './reducers';
 import routes from './routes';
@@ -25,27 +25,27 @@ if (token) {
   store.dispatch({ type: AUTH_USER });
 }
 
-// var socket = io();
+var socket = io();
 
-// socket.on('news', function (data) {
-//   console.log(data);
-//   socket.emit('my other event', { my: 'data' });
-// });
+socket.on('news', function (data) {
+  console.log(data);
+  socket.emit('my other event', { my: 'data' });
+});
 
-// socket.on('createpoll', function(data) {
-//   store.dispatch(actions.addCreatedPoll(data));
-//   console.log('data createpoll socket.on:', data);
-// });
+socket.on('createpoll', function(data) {
+  store.dispatch(actions.addCreatedPoll(data));
+  console.log('data createpoll socket.on:', data);
+});
 
-// socket.on('pendingpoll', function(data) {
-//   store.dispatch(actions.updateResultsPolls(data));
-//   console.log('data pending poll socket', data);
-// });
+socket.on('pendingpoll', function(data) {
+  store.dispatch(actions.updateResultsPolls(data));
+  console.log('data pending poll socket', data);
+});
 
-// socket.on('resultspoll', function(data) {
-//   store.dispatch(actions.updatePendingPolls(data));
-//   console.log('data results poll socket', data);
-// });
+socket.on('resultspoll', function(data) {
+  store.dispatch(actions.updatePendingPolls(data));
+  console.log('data results poll socket', data);
+});
 
 const muiTheme = getMuiTheme({
   palette: {
