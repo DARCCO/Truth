@@ -154,7 +154,7 @@ export function createPoll(props) {
 }
 
 export function addCreatedPoll(data) {
-  //console.log('inside AddCreatedPoll');
+  console.log('inside AddCreatedPoll');
   return {
     type: ADD_CREATED_POLL,
     payload: data

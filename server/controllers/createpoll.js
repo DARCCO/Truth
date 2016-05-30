@@ -7,19 +7,23 @@ exports.answerPending = function(req, res, next) {
     if (err) { return next(err); }
     // remove poll from their pending
     delete user.pending[req.body.id];
-    User.findOneAndUpdate( { username: user.username }, { pending: user.pending }, { next: true }, function(err, user) {
+    User.findOneAndUpdate( { username: user.username }, { pending: user.pending }, { new: true }, function(err, user) {
       if (err) { return next(err); }
     });
   });
   // find poll by id
   Poll.findOne({ "_id": req.body.id }, function(err, poll) {
-  // update answer count
+    // update answer count
+    console.log('poll.answers before ++', poll.answers);
     poll.answers[req.body.answer]++;
-    Poll.findOneAndUpdate({ "_id": poll.id }, { answers: poll.answers }, { next: true }, function(err, poll) {
+    console.log('poll.answers after ++', poll.answers);
+    Poll.findOneAndUpdate({ "_id": poll.id }, { answers: poll.answers }, { new: true }, function(err, poll) {
       if (err) { return next(err); }
+      console.log('poll after update:', poll);
+      req.body.poll = poll;
+      next();
     })
   });
-  next();
 }
 
 exports.removeResults = function(req, res, next) {
