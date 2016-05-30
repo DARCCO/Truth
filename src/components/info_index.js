@@ -24,7 +24,7 @@ class InfoIndex extends Component {
         {this.renderHeader()}
         <div>
           <Paper style={style} zDepth={4} >
-           
+           <img className= 'center-Splash'src='TRUTHLOGO.png' alt= 'truthlogo'/>
           </Paper>
         </div>
       </div>

@@ -72,7 +72,7 @@ class CreatePoll extends Component {
   render() {
     const { fields: { question, answer1, answer2, answer3, answer4 }, handleSubmit } = this.props;
     const style = {
-      height: 700
+      height: '100%'
     };
 
     const styleButton= {
@@ -111,13 +111,13 @@ class CreatePoll extends Component {
         <div className= 'modal-body'>
           {this.state.file.length > 0 ?
             <div className= 'centered-Create'>
-              <img src={this.state.file[0].preview} height="200" />
+              <img className= 'dropzoneIMG' src={this.state.file[0].preview} />
             </div>
           :
             <div>
               <div>
               <Dropzone style= { styleDropzone } onDrop={this.onDrop} accept="image/*">
-                <div>Try dropping an image here, or click to select image to upload.</div>
+                <div className= 'text-center'>Try dropping an image here, or click to select image to upload.</div>
               </Dropzone>
               </div>
             </div>
@@ -146,10 +146,12 @@ class CreatePoll extends Component {
 
           <div className="form-group">
           <TextField style ={{width: '80%'}} hintText= 'Answer 3' { ...answer3 }/>
+          {answer3.touched && answer3.error && <div className= 'error'>{answer3.error}</div>}
           </div>
 
           <div className="form-group">
           <TextField style ={{width: '80%'}} hintText= 'Answer 4' { ...answer4 }/>
+          {answer4.touched && answer4.error && <div className= 'error'>{answer4.error}</div>}
           </div>
           <RaisedButton style= {styleButton} type='submit' label= 'Submit' primary= {true}/>
         </form>
@@ -175,24 +177,62 @@ function validate(values) {
     errors.answer2 = 'Required: Enter a possible answer';
   }
 
-  if (values.question && values.question.indexOf('.') !== -1) {
-    errors.question= 'Questions must not contain periods';
+
+  if (values.answer1) {
+    if (values.answer1.indexOf('.') !== -1) {
+     errors.answer1= 'Answers must not contain periods';
+    }
   }
 
-  if (values.answer1 && values.answer1.indexOf('.') !== -1) {
-    errors.answer1= 'Answers must not contain periods';
+  if (values.answer2) {
+    if (values.answer2.indexOf('.') !== -1) {
+      errors.answer2= 'Answers must not contain periods';    
+    }
+    if (!values.answer1) {
+      errors.answer2 = 'Previous answers must be completed';
+    }
+    if (values.answer1) {
+      const answer2= values.answer2.replace(/ /g, '').toLowerCase();
+      const answer1= values.answer1.replace(/ /g, '').toLowerCase();
+      if (answer2 === answer1) {
+        errors.answer2= 'Answers must not match';
+      }
+    }
   }
 
-  if (values.answer2 && values.answer2.indexOf('.') !== -1) {
-    errors.answer2= 'Answers must not contain periods';
+  if (values.answer3) {
+    if (values.answer3.indexOf('.') !== -1) {
+      errors.answer3= 'Answers must not contain periods';      
+    }
+    if (!values.answer1 || !values.answer2) {
+      errors.answer3 = 'Previous answers must be completed';
+    }
+    if (values.answer2 && values.answer1){
+      const answer3= values.answer3.replace(/ /g, '').toLowerCase();
+      const answer2= values.answer2.replace(/ /g, '').toLowerCase();
+      const answer1= values.answer1.replace(/ /g, '').toLowerCase();
+      if (answer3 === answer2 || answer3 === answer1) {
+        errors.answer3= 'Answers must not match';
+      }
+    }
   }
 
-  if (values.answer3 && values.answer3.indexOf('.') !== -1) {
-    errors.answer3= 'Answers must not contain periods';
-  }
-
-  if (values.answer4 && values.answer4.indexOf('.') !== -1) {
-    errors.answer4= 'Answers must not contain periods';
+  if (values.answer4) {
+    if (values.answer4.indexOf('.') !== -1) {
+      errors.answer4= 'Answers must not contain periods';    
+    }
+    if (!values.answer3) {
+      errors.answer4 = 'Previous answers must be completed';
+    }
+    if (values.answer3 && values.answer2 && values.answer1) {
+      const answer4= values.answer4.replace(/ /g, '').toLowerCase();
+      const answer3= values.answer3.replace(/ /g, '').toLowerCase();
+      const answer2= values.answer2.replace(/ /g, '').toLowerCase();
+      const answer1= values.answer1.replace(/ /g, '').toLowerCase();
+      if (answer4 === answer3 || answer4 === answer2 || answer4 === answer1) {
+        errors.answer4= 'Answers must not match';
+      }
+    }
   }
 
   return errors;
