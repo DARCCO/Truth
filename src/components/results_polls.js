@@ -34,7 +34,7 @@ class ResultsPolls extends Component {
     const dataCheck = data.filter((curr) => curr.value === 0 );
     data.forEach((d, index) => chartSeries.push({field: d.answer, name: d.answer, color: colors[index]}));
     const style = {
-      height: 500
+      height: '100%'
     };
     console.log('this.props inside resultspolls', this.props);
     return (
@@ -43,7 +43,6 @@ class ResultsPolls extends Component {
           <RaisedButton label='Delete Poll' onClick={ () => this.props.deleteResultsPoll(pollId) } primary={true}/>
           <h3 className="text-center">{question}</h3>
         </div>
-        
         <div className="row table-row">
           <div className="col-sm-4 col-md-4 col-lg-4 text-right" >
             <span>
@@ -55,11 +54,11 @@ class ResultsPolls extends Component {
           <div className="col-sm-6 col-md-6 col-lg-6 text-center" >
             {dataCheck.length === data.length ?
                 <div className="jumbotron">
-                  <h1>Waiting on Responses</h1>      
+                  <h1>Waiting on Responses</h1>
                   <p>You will know the truth soon enough.</p>
                 </div>
               :
-                <PieChart 
+                <PieChart
                 data={data}
                 width={width}
                 height={height}
