@@ -5,6 +5,9 @@
 .text-center {
   text-align: center;
 }
+.text-right {
+  text-align: right;
+}
 
 .center {
   align-content: center;
@@ -62,6 +65,12 @@
   min-height: 300px;
 }
 
+#alert-info {
+  color: #75008A;
+  background-color: #DD2BFC;
+  border-color: #75008A;
+}
+
 .wrapper {
     width: 940px;
     margin: 0 auto;
@@ -82,3 +91,47 @@
     position: fixed;
     /* Do not set top / left! */
 }
+
+.frame {
+   height: 150px;      /* equals max image height */
+   width: 150px;
+   white-space: nowrap;
+   
+   text-align: center; margin: 1em 0;
+}
+
+.helper {
+   display: inline-block;
+   height: 100%;
+   vertical-align: middle;
+}
+
+img {
+   background: #3A6F9A ;
+   vertical-align: middle;
+   max-height: 150px;
+   max-width: 150px;
+}
+
+.question {
+  padding-bottom: 10px;
+}
+
+.row {
+  height: 75%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jumbotron{
+    width: 80vh;
+    /*justify-content: right;
+    align-items: right;*/
+}
+
+.legend {
+  text-align: right;
+}
+
+

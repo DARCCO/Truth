@@ -37,18 +37,23 @@ class PendingPolls extends Component {
         <div >
           <div className="col-md-12">
             <div className="col-md-2" >
-              <img src={photo} className= 'image' />
+              <div className='frame'>
+                <span className='helper'></span>
+                <img src= {photo} className= 'image' />
+              </div>
             </div>
-            <h3 className="text-center">{question}</h3>
             <div >
               <div className="col-md-10 center" >
+                <h3 className="col-md-10 question">{question}</h3>
+                <div className= 'centered-Create'>
                 { _.map(answers, (answer, key) => {
                   return (
                     <div key={key} className="col-md-5" >
-                      <RaisedButton style= {styleButton} label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll({ id: pollId, username: this.props.username, answer: key }) }/>
+                      <RaisedButton style= {styleButton} label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll(pollId) }/>
                     </div>
                   );
                 })}
+                </div>
               </div>
             </div>
           </div>
@@ -70,7 +75,7 @@ class PendingPolls extends Component {
 
 
 function mapStateToProps(state) {
-  return { pendingPolls: state.user.pending, username: state.user.username };
+  return { pendingPolls: state.user.pending };
 }
 
 //
