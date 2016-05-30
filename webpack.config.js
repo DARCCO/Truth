@@ -1,3 +1,5 @@
+var UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
+
 module.exports = {
   entry: [
     './src/index.js'
@@ -13,6 +15,9 @@ module.exports = {
       loader: 'babel'
     }]
   },
+  plugins: [
+    // new UglifyJsPlugin()
+  ],
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
