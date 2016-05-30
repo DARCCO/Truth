@@ -34,7 +34,7 @@ class CreatePoll extends Component {
           var resizedImage;
           // Resize the image
           var canvas = document.createElement('canvas'),
-            max_size = 150,
+            max_size = 300,
             width = image.width,
             height = image.height;
           if (width > height) {
@@ -186,7 +186,7 @@ function validate(values) {
 
   if (values.answer2) {
     if (values.answer2.indexOf('.') !== -1) {
-      errors.answer2= 'Answers must not contain periods';    
+      errors.answer2= 'Answers must not contain periods';
     }
     if (!values.answer1) {
       errors.answer2 = 'Previous answers must be completed';
@@ -202,7 +202,7 @@ function validate(values) {
 
   if (values.answer3) {
     if (values.answer3.indexOf('.') !== -1) {
-      errors.answer3= 'Answers must not contain periods';      
+      errors.answer3= 'Answers must not contain periods';
     }
     if (!values.answer1 || !values.answer2) {
       errors.answer3 = 'Previous answers must be completed';
@@ -219,7 +219,7 @@ function validate(values) {
 
   if (values.answer4) {
     if (values.answer4.indexOf('.') !== -1) {
-      errors.answer4= 'Answers must not contain periods';    
+      errors.answer4= 'Answers must not contain periods';
     }
     if (!values.answer3) {
       errors.answer4 = 'Previous answers must be completed';
