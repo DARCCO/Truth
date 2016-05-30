@@ -32,30 +32,35 @@ class PendingPolls extends Component {
       margin: '2px'
     }
 
-    return (
-      <Paper key={pollId} zDepth= {2} style= {style}>
-        <div >
-          <div className="col-md-12">
-            <div className="col-md-2" >
-              <img src={photo} className= 'image' />
-            </div>
-            <h3 className="text-center">{question}</h3>
-            <div >
-              <div className="col-md-10 center" >
-                { _.map(answers, (answer, key) => {
-                  return (
-                    <div key={key} className="col-md-5" >
+     return (
+       <Paper key={pollId} zDepth= {2} style= {style}>
+         <div >
+           <div className="col-md-12">
+             <div className="col-md-2" >
+               <div className='frame'>
+                 <span className='helper'></span>
+                 <img src= {photo} className= 'image' />
+               </div>
+             </div>
+             <div >
+               <div className="col-md-10 center" >
+                 <h3 className="col-md-10 question">{question}</h3>
+                 <div className= 'centered-Create'>
+                 { _.map(answers, (answer, key) => {
+                   return (
+                     <div key={key} className="col-md-5" >
                       <RaisedButton style= {styleButton} label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll({ id: pollId, username: this.props.username, answer: key }) }/>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </Paper>
-    );
-  }
+                     </div>
+                   );
+                 })}
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </Paper>
+     );
+   }
 
   render() {
     return (
