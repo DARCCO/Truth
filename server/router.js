@@ -29,17 +29,20 @@ module.exports = function(app, io) {
 
   app.post('/pendingpolls', CreatePoll.answerPending, function(req, res, next) {
     console.log('req.body inside /pendingpolls', req.body);
+    io.sockets.emit('pendingpoll', { poll: req.body.poll }); // needs poll sent through
     res.json({ id: req.body.id });
   });
 
   app.post('/resultspolls', CreatePoll.removeResults, function(req, res, next) {
     console.log('req.body inside /resultspolls', req.body);
+    io.sockets.emit('resultspoll', { id: req.body.pollId }); // needs poll sent through
     res.json({ id: req.body.pollId });
   });
 
   app.post('/signup', Authentication.signup);
 
   app.post('/createpoll', CreatePoll.createPoll, function(req, res, next) {
+    io.sockets.emit('createpoll', { poll: req.body.poll });
     res.json({ poll: req.body.poll })
   });
 

@@ -32,13 +32,5 @@ router(app, io);
 // Server setup
 
 const port = process.env.PORT || 3050;
-
-io.on('connection', function(socket){
-  console.log('connected io');
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
 server.listen(port);
 console.log('Server listening on:', port);

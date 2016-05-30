@@ -33,18 +33,18 @@ socket.on('news', function (data) {
 });
 
 socket.on('createpoll', function(data) {
-  store.dispatch(actions.addCreatedPoll(data));
   console.log('data createpoll socket.on:', data);
+  store.dispatch(actions.addCreatedPoll(data));
 });
 
 socket.on('pendingpoll', function(data) {
-  store.dispatch(actions.updateResultsPolls(data));
   console.log('data pending poll socket', data);
+  store.dispatch(actions.updateResultsPolls(data));
 });
 
 socket.on('resultspoll', function(data) {
-  store.dispatch(actions.updatePendingPolls(data));
   console.log('data results poll socket', data);
+  store.dispatch(actions.updatePendingPolls(data));
 });
 
 const muiTheme = getMuiTheme({
