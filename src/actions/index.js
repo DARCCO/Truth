@@ -36,6 +36,7 @@ export function signupUser({ username, password }) {
         browserHistory.push('/pendingpolls');
       })
       .catch((response) => {
+        console.log('inside .catch of signupuser', response);
         dispatch(authError(response.data.error));
         console.log(response.data);
       });

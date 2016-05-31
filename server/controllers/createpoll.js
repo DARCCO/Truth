@@ -80,7 +80,6 @@ exports.createPoll = function(req, res, next) {
     answers
   });
 
-
   poll.save(function(err){
     //finished saving created poll to database
     //need to update usernames createdPoll list with new poll id
