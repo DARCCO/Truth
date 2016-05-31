@@ -4,7 +4,7 @@
   "description": "Anonymous Polling Application",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node server/index.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "dev": "nodemon server/index.js",
     "test:watch": "npm run test -- --watch"
@@ -30,6 +30,7 @@
     "babel-preset-stage-1": "^6.1.18",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",
+    "cors": "^2.7.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "jwt-simple": "^0.5.0",
@@ -39,10 +40,9 @@
     "morgan": "^1.7.0",
     "nodemon": "^1.9.2",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
     "passport-jwt": "^2.0.0",
-    "react": "^0.14.8",
-    "react-d3-basic": "^1.6.11",
+    "passport-local": "^1.0.0",
+    "react": "^15.0.0",
     "react-dom": "^0.14.3",
     "react-dropzone": "^3.4.0",
     "react-redux": "^4.0.0",
@@ -50,6 +50,7 @@
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.0.4",
     "redux-form": "^4.1.3",
+    "redux-persist": "^3.2.2",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",
     "socket.io": "^1.4.6"

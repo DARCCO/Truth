@@ -4,26 +4,11 @@ const bcrypt = require('bcrypt-nodejs')
 
 const pollSchema = new Schema({
 
-  photo: { data: Buffer, contentType: String },
-  question: { type: String, lowercase: true },
-  answers: {
-  	a1: {
-      a: { type: String },
-      count: { type: Number }
-  	},
-  	a2: {
-      a: { type: String },
-      count: { type: Number }
-  	},
-  	a3: {
-      a: { type: String },
-      count: { type: Number }
-  	},
-  	a4: {
-      a: { type: String },
-      count: { type: Number }
-  	}
-  }
+  photo: String,
+  createdBy: String,
+  createdAt: Date,
+  question: String,
+  answers: {}
 
 });
 

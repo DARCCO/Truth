@@ -7,14 +7,15 @@ const userSchema = new Schema({
   // username prop has obj to determine it is unique username
   // and to make tolowercase
   username: { type: String, unique: true, lowercase: true },
-  password: String
-  // photo: { data: Buffer, contentType: String },
-  // city: String,
-  // country: String,
-  // friends: [String],
-  //pending: [String],
-  //created: [String]
-
+  password: String,
+  photo: String,
+  city: String,
+  country: String,
+  gender: String,
+  friends: {},
+  pending: {},
+  created: {},
+  lastCreatedPollAt: Date
 });
 
 // On save Hook, encrypt password

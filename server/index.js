@@ -16,30 +16,24 @@ const io = require('socket.io')(server);
 
 // DB setup --> connects our db to our code
 
-mongoose.connect('mongodb://127.0.0.1:auth/truthdb');
+//to setup a deployed mongodb, use the mlab addon from heroku which is a cloud mongodb storage
+// then instead of connecting to mongodb://127.0.0.1:auth/truthdb
+// connect to the your authenticated mongodb
 
+mongoose.connect('mongodb://127.0.0.1:auth/truthdb');
 // App setup
 
 
 // morgan logs so we can debug
 // bodyParser puts all requests into json
-app.use(morgan('combined'))
+app.use(morgan('combined'));
 app.use(cors());
-app.use(bodyParser.json({type: '*/*'}))
-
+app.use(bodyParser.json({type: '*/*'}));
 router(app, io);
 
 
 // Server setup
 
-const port = process.env.PORT || 3090;
-
-io.on('connection', function(socket){
-  console.log('connected io');
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+const port = process.env.PORT || 3050;
 server.listen(port);
 console.log('Server listening on:', port);

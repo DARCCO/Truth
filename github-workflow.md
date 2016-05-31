@@ -2,6 +2,8 @@
 
 ###SETUP
 
+*** DO DOT --FORCE ANYTHING ***
+
 1) FORK and CLONE from the master repo on our organization's profile.
 
 2) A dev branch should be available. If it doesn't show up, it's actually there - you jut can't see it. Switch to it with `git checkout dev`. Use `git branch` to see all the branches.

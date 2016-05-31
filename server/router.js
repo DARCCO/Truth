@@ -1,8 +1,7 @@
 const Authentication = require('./controllers/authentication');
 const passportService = require('./services/passport');
 const passport = require('passport');
-const CreatePoll = require('./controllers/createpoll')
-//const session = require('express-session');
+const CreatePoll = require('./controllers/createpoll');
 const path = require('path');
 
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -10,16 +9,20 @@ const requireSignin = passport.authenticate('local', { session: false });
 
 module.exports = function(app, io) {
 
-  // app.use(session({secret: 'asldkhfnpqwe'}));
-  // app.use(passport.initialize());
-  // app.use(passport.session());
-
   app.get('/', function(req, res) {
-  	res.sendFile(path.resolve(__dirname + '/../index.html'));
+    res.sendFile(path.resolve(__dirname + '/../index.html'));
   });
 
   app.get('/bundle.js', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../bundle.js'));
+  });
+
+  app.get('/TRUTHLOGO.png', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../TRUTHLOGO.png'));
+  });
+
+  app.get('/favicon.png', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../favicon.png'));
   });
 
   app.get('/style/style.css', function(req, res) {
@@ -32,55 +35,22 @@ module.exports = function(app, io) {
 
   app.post('/signin', requireSignin, Authentication.signin);
 
-  // app.post('/createPoll', function(req, res) {
-  //   console.log('inside server /createPoll');
-  //   console.log('req.body', req.body);
-  //   io.sockets.emit('createpoll', { it: 'worked' });
-  // })
+  app.post('/pendingpolls', CreatePoll.answerPending, function(req, res, next) {
+    io.sockets.emit('pendingpoll', { poll: req.body.poll }); // needs poll sent through
+    res.json({ id: req.body.id });
+  });
 
-
-  app.post('/createPoll', function(req, res) {
-    console.log('inside server /createPoll');
-    console.log('req.body', req.body);
-    io.sockets.emit('createpoll', {pollId: 'drew4' , poll: {
-    pollId: 'drew',
-    photo: null,
-    question: "Whats my age again?",
-    answers: {
-      "22": 0,
-      "23": 0,
-      "24": 0
-    }}});
-    res.send({});
-  })
-
-    // 'drew1': {
-    // pollId: 'drew',
-    // photo: null,
-    // question: "Whats my age again?",
-    // answers: {
-    //   "22": 0,
-    //   "23": 0,
-    //   "24": 0
-    // }
-  app.post('/pendingpolls', function(req, res) {
-
-    io.sockets.emit('pendingpoll', { pollId: pollId, poll: {} });
-    res.send({});
-  })
-
-  app.delete('/resultspolls', function(req, res) {
-    io.sockets.emit('resultspoll', { pollId: pollId, poll: {} });
-    res.send({});
-  })
+  app.post('/resultspolls', CreatePoll.removeResults, function(req, res, next) {
+    io.sockets.emit('resultspoll', { id: req.body.pollId }); // needs poll sent through
+    res.json({ id: req.body.pollId });
+  });
 
   app.post('/signup', Authentication.signup);
 
-  //app.post('/createpoll', CreatePoll.createPoll);
-  app.post('/createpoll', function(req, res) {
-    console.log('inside createpoll server route');
-    console.log('req.body:', req.body);
-  })
+  app.post('/createpoll', CreatePoll.createPoll, function(req, res, next) {
+    io.sockets.emit('createpoll', { poll: req.body.poll });
+    res.json({ poll: req.body.poll })
+  });
 
   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -89,4 +59,3 @@ module.exports = function(app, io) {
   });
 
 }
-

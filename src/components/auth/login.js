@@ -11,10 +11,11 @@ import { cyan100, lightBlue50, teal50 } from 'material-ui/styles/colors';
 
 class Login extends Component {
   handleFormSubmit({username, password}) {
+
     this.props.loginUser({ username, password });
   }
   renderErrorAlert(){
-    if (this.props.errorMessage){
+    if (this.props.errorMessage && this.props.errorMessage !== 'Username is in use'){
       return (
         <div className='alert alert-danger'>
           <strong>{this.props.errorMessage}</strong>
@@ -33,7 +34,7 @@ class Login extends Component {
       <div>
         <LoginHeader value ={0} />
         <Paper style= {style} zDepth= {4}>
-        <div className= 'centered-Create'>
+        <div className= 'centered-Login'>
         <form onSubmit= {handleSubmit(this.handleFormSubmit.bind(this))}>
         <fieldset className= 'form-group'>
           <TextField halfWidth hintText= 'Username' { ...username }/>
