@@ -132,7 +132,7 @@ class PendingPolls extends Component {
     return (
       <div>
         <Header value= {2}/>
-        <Paper zDepth= {2} style={{height: "100vh"}}>
+        <Paper zDepth= {2} style={{height: "auto"}}>
           { _.isEmpty(this.props.pendingPolls) ?
             <div className="jumbotron text-center white-text">
               <h1>Oops!</h1>
