@@ -8,6 +8,7 @@ import { AUTH_USER } from './actions/index';
 import { ADD_CREATED_POLL } from './actions/index';
 import * as actions from './actions/index';
 import io from 'socket.io-client';
+import {persistStore, autoRehydrate} from 'redux-persist';
 
 import reducers from './reducers';
 import routes from './routes';
@@ -17,7 +18,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {green100, green500, purple500, pink500, purpleA400} from 'material-ui/styles/colors';
 
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+const store = createStoreWithMiddleware(reducers, undefined, autoRehydrate());
+persistStore(store);
 const token = localStorage.getItem('token');
 
 //change to if (token)
