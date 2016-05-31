@@ -13,10 +13,6 @@ class PendingPolls extends Component {
 
     this.renderPendingPolls = this.renderPendingPolls.bind(this);
   }
-  //need to limit polls to like 20
-  // componentWillMount(){
-  //   this.props.fetchPolls();
-  // }
 
   renderPendingPolls(pollsData, key) {
     var photo = pollsData.photo;
@@ -86,48 +82,6 @@ class PendingPolls extends Component {
 
   }
 
-  // renderPendingPolls(pollsData, key) {
-  //   var photo = pollsData.photo;
-  //   var question = pollsData.question;
-  //   var answers = pollsData.answers;
-  //   var pollId= key;
-
-  //   const style = {
-  //     height: 200
-  //   };
-
-  //   const styleButton= {
-  //     margin: '2px'
-  //   }
-
-  //    return (
-  //        <div key={pollId}>
-  //          <div className="col-md-12">
-  //            <div className="col-md-2" >
-  //              <div className='frame'>
-  //                <span className='helper'></span>
-  //                <img src= {photo} className= 'image' />
-  //              </div>
-  //            </div>
-  //            <div >
-  //              <div className="col-md-10 center" >
-  //                <h3 className="col-md-10 question">{question}</h3>
-  //                <div className= 'centered-Create'>
-  //                { _.map(answers, (answer, key) => {
-  //                  return (
-  //                    <div key={key} className="col-md-5" >
-  //                     <RaisedButton style= {styleButton} label= {key} primary= {true} onClick={ ()=> this.props.deletePendingPoll({ id: pollId, username: this.props.username, answer: key }) }/>
-  //                    </div>
-  //                  );
-  //                })}
-  //                </div>
-  //              </div>
-  //            </div>
-  //          </div>
-  //        </div>
-  //    );
-  //  }
-
   render() {
     return (
       <div>
@@ -153,7 +107,6 @@ function mapStateToProps(state) {
   return { pendingPolls: state.user.pending, username: state.user.username };
 }
 
-//
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ deletePendingPoll, fetchPolls }, dispatch);
 }

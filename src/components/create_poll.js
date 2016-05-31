@@ -23,7 +23,6 @@ class CreatePoll extends Component {
 
   onDrop(file) {
     //make sure file is an image file in here
-    console.log('file', file);
     var that = this;
     if (file[0].type.match(/image.*/)) {
       var reader = new FileReader();
@@ -111,11 +110,7 @@ class CreatePoll extends Component {
         <div className= 'modal-body'>
           {this.state.file.length > 0 ?
             <div className= 'centered-Create'>
-<<<<<<< 756e569d103997a00f7ffc8df1b40cf7864990a7
               <img className= 'dropzoneIMG' src={this.state.file[0].preview} />
-=======
-              <img src={this.state.file[0].preview} />
->>>>>>> [Progress] Removes image height hardcode
             </div>
           :
             <div>
