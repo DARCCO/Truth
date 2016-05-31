@@ -22,36 +22,27 @@ const store = createStoreWithMiddleware(reducers, undefined, autoRehydrate());
 persistStore(store);
 const token = localStorage.getItem('token');
 
-//change to if (token)
 if (token) {
   store.dispatch({ type: AUTH_USER });
 }
 
 var socket = io();
 
-socket.on('news', function (data) {
-  console.log(data);
-  socket.emit('my other event', { my: 'data' });
-});
-
 socket.on('createpoll', function(data) {
-  console.log('data createpoll socket.on:', data);
   store.dispatch(actions.addCreatedPoll(data));
 });
 
 socket.on('pendingpoll', function(data) {
-  console.log('data pending poll socket', data);
   store.dispatch(actions.updateResultsPolls(data));
 });
 
 socket.on('resultspoll', function(data) {
-  console.log('data results poll socket', data);
   store.dispatch(actions.updatePendingPolls(data));
 });
 
 const muiTheme = getMuiTheme({
   palette: {
-   primary1Color: purpleA400,
+   primary1Color: '#394264',
    primary2Color: green500,
    //accent1Color: green500
   },

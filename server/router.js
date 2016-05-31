@@ -19,7 +19,11 @@ module.exports = function(app, io) {
 
   app.get('/TRUTHLOGO.png', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../TRUTHLOGO.png'));
-  })
+  });
+
+  app.get('/favicon.png', function(req, res) {
+    res.sendFile(path.resolve(__dirname + '/../favicon.png'));
+  });
 
   app.get('/style/style.css', function(req, res) {
     res.sendFile(path.resolve(__dirname + '/../style/style.css'));
@@ -32,13 +36,11 @@ module.exports = function(app, io) {
   app.post('/signin', requireSignin, Authentication.signin);
 
   app.post('/pendingpolls', CreatePoll.answerPending, function(req, res, next) {
-    console.log('req.body inside /pendingpolls', req.body);
     io.sockets.emit('pendingpoll', { poll: req.body.poll }); // needs poll sent through
     res.json({ id: req.body.id });
   });
 
   app.post('/resultspolls', CreatePoll.removeResults, function(req, res, next) {
-    console.log('req.body inside /resultspolls', req.body);
     io.sockets.emit('resultspoll', { id: req.body.pollId }); // needs poll sent through
     res.json({ id: req.body.pollId });
   });

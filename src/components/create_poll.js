@@ -23,7 +23,6 @@ class CreatePoll extends Component {
 
   onDrop(file) {
     //make sure file is an image file in here
-    console.log('file', file);
     var that = this;
     if (file[0].type.match(/image.*/)) {
       var reader = new FileReader();
@@ -34,7 +33,7 @@ class CreatePoll extends Component {
           var resizedImage;
           // Resize the image
           var canvas = document.createElement('canvas'),
-            max_size = 150,
+            max_size = 300,
             width = image.width,
             height = image.height;
           if (width > height) {
@@ -165,6 +164,12 @@ class CreatePoll extends Component {
 function validate(values) {
   const errors = {};
 
+  if (values.question) {
+    if (values.question.length > 70) {
+      errors.question = 'Please enter a shorter question';
+    }
+  }
+
   if (!values.question) {
     errors.question = 'Required: Enter a question';
   }
@@ -179,14 +184,20 @@ function validate(values) {
 
 
   if (values.answer1) {
+    if (values.answer1.length > 20) {
+      errors.answer1 = 'Please enter a shorter answer';
+    }
     if (values.answer1.indexOf('.') !== -1) {
      errors.answer1= 'Answers must not contain periods';
     }
   }
 
   if (values.answer2) {
+    if (values.answer2.length > 20) {
+      errors.answer2 = 'Please enter a shorter answer';
+    }
     if (values.answer2.indexOf('.') !== -1) {
-      errors.answer2= 'Answers must not contain periods';    
+      errors.answer2= 'Answers must not contain periods';
     }
     if (!values.answer1) {
       errors.answer2 = 'Previous answers must be completed';
@@ -201,8 +212,11 @@ function validate(values) {
   }
 
   if (values.answer3) {
+    if (values.answer3.length > 20) {
+      errors.answer3 = 'Please enter a shorter answer';
+    }
     if (values.answer3.indexOf('.') !== -1) {
-      errors.answer3= 'Answers must not contain periods';      
+      errors.answer3= 'Answers must not contain periods';
     }
     if (!values.answer1 || !values.answer2) {
       errors.answer3 = 'Previous answers must be completed';
@@ -218,8 +232,11 @@ function validate(values) {
   }
 
   if (values.answer4) {
+    if (values.answer4.length > 20) {
+      errors.answer4 = 'Please enter a shorter answer';
+    }
     if (values.answer4.indexOf('.') !== -1) {
-      errors.answer4= 'Answers must not contain periods';    
+      errors.answer4= 'Answers must not contain periods';
     }
     if (!values.answer3) {
       errors.answer4 = 'Previous answers must be completed';

@@ -16,8 +16,11 @@ const io = require('socket.io')(server);
 
 // DB setup --> connects our db to our code
 
-mongoose.connect('mongodb://127.0.0.1:auth/truthdb');
+//to setup a deployed mongodb, use the mlab addon from heroku which is a cloud mongodb storage
+// then instead of connecting to mongodb://127.0.0.1:auth/truthdb
+// connect to the your authenticated mongodb
 
+mongoose.connect('mongodb://127.0.0.1:auth/truthdb');
 // App setup
 
 

@@ -22,6 +22,7 @@ export function loginUser({ username, password }) {
       })
       .catch(() => {
         dispatch(authError('Incorrect Login Information'));
+        console.log(response.data);
       });
   }
 }
@@ -37,6 +38,7 @@ export function signupUser({ username, password }) {
       .catch((response) => {
         console.log('inside .catch of signupuser', response);
         dispatch(authError(response.data.error));
+        console.log(response.data);
       });
   }
 }
@@ -55,33 +57,6 @@ export function authError(error) {
   }
 }
 
-export function fetchPolls() {
-  console.log('fetch polls action creator');
-  return function(dispatch) {
-    axios.get('/polls', {
-      headers: { authorization: localStorage.getItem('token') }
-    })
-      .then(response => {
-        dispatch({
-          type: FETCH_POLLS,
-          payload: response
-        });
-      })
-      .catch(response => {
-        localStorage.removeItem('token');
-        browserHistory.push('/login');
-      });
-  }
-  // const request = axios.get('/polls', {
-  //   headers: { authorization: localStorage.getItem('token') }
-  // }) //axios request
-
-  // return {
-  //   type: FETCH_POLLS,
-  //   payload: request
-  // };
-}
-
 export function deletePendingPoll(info) {
   return function(dispatch) {
     axios.post('/pendingpolls', info, {
@@ -94,67 +69,46 @@ export function deletePendingPoll(info) {
         });
       })
       .catch(response => {
-        console.log('response.data in .catch deletePendingPoll:', response.data);
+        console.log(response.data);
       });
   }
-  // axios.post('/pendingpolls', pollId, {
-  //   headers: {authorization: localStorage.getItem('token') }
-  // })
-  // .then(function(res){
-  //   console.log(res);
-  // }).catch(function(err){
-  //   console.error(err);
-  // });
-
-  // return {
-  //   type: DELETE_PENDING_POLL,
-  //   payload: pollId
-  // };
 }
 
 export function deleteResultsPoll(pollId) {
-  console.log('pollId:', pollId);
-  console.log('inside deleteResultspoll action creator');
   return function(dispatch) {
     axios.post('/resultspolls', { pollId }, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
-        console.log('resp.data in .then', response.data);
         dispatch({
           type: DELETE_RESULTS_POLL,
           payload: response.data
         });
       })
       .catch(response => {
-        console.log('response.data in .catch deleteResultsPoll:', response.data);
+        console.log(response.data);
       });
   }
 }
 
 export function createPoll(props) {
-  console.log('createpoll props inside action creator', props);
-  console.log('props.dataURL', props.dataURL);
   return function(dispatch) {
-    console.log('right before axios.post(createpoll)');
     axios.post('/createpoll', props, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
-        console.log('response.data in .then createPoll:', response.data);
         dispatch({
           type: CREATE_POLL,
           payload: response.data
         });
       })
       .catch(response => {
-        console.log('response.data in .catch createPoll:', response.data);
+        console.log(response.data);
       });
   }
 }
 
 export function addCreatedPoll(data) {
-  console.log('inside AddCreatedPoll');
   return {
     type: ADD_CREATED_POLL,
     payload: data

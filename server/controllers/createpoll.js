@@ -14,12 +14,9 @@ exports.answerPending = function(req, res, next) {
   // find poll by id
   Poll.findOne({ "_id": req.body.id }, function(err, poll) {
     // update answer count
-    console.log('poll.answers before ++', poll.answers);
     poll.answers[req.body.answer]++;
-    console.log('poll.answers after ++', poll.answers);
     Poll.findOneAndUpdate({ "_id": poll.id }, { answers: poll.answers }, { new: true }, function(err, poll) {
       if (err) { return next(err); }
-      console.log('poll after update:', poll);
       req.body.poll = poll;
       next();
     })
@@ -82,8 +79,6 @@ exports.createPoll = function(req, res, next) {
     question: req.body.question,
     answers
   });
-
-  console.log('poll is: ', poll);
 
   poll.save(function(err){
     //finished saving created poll to database

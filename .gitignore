@@ -2,4 +2,6 @@
 npm-debug.log
 .DS_STORE
 bundle.js
+bundle.js.map
+common.js
 /server/config.js
