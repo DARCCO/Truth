@@ -20,17 +20,11 @@ const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk)(createSto
 const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem('token');
 
-//change to if (token)
 if (token) {
   store.dispatch({ type: AUTH_USER });
 }
 
 var socket = io();
-
-socket.on('news', function (data) {
-  console.log(data);
-  socket.emit('my other event', { my: 'data' });
-});
 
 socket.on('createpoll', function(data) {
   console.log('data createpoll socket.on:', data);
@@ -49,7 +43,7 @@ socket.on('resultspoll', function(data) {
 
 const muiTheme = getMuiTheme({
   palette: {
-   primary1Color: purpleA400,
+   primary1Color: '#394264',
    primary2Color: green500,
    //accent1Color: green500
   },
